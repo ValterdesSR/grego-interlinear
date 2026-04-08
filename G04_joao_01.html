@@ -5090,17 +5090,6 @@ function toggleTraducao(){
  });
 }
 
-function buscarNaPagina(){
- let termo=document.getElementById("buscaInput").value.toLowerCase();
- if(!termo) return;
- let elementos=document.querySelectorAll("body *");
- elementos.forEach(el=>{
-   if(el.children.length===0 && el.textContent.toLowerCase().includes(termo)){
-     el.innerHTML=el.textContent.replace(new RegExp(termo,"gi"),'<mark style="background:yellow;">$&</mark>');
-   }
- });
-}
-
 </script>
 
 <script src="prontos.js"></script>
