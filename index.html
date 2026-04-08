@@ -111,7 +111,66 @@ header p {
 .card.aberto .card-caps {
   display: block;
 }
- 
+
+/* ── SEÇÃO DINÂMICA DE CAPÍTULOS DISPONÍVEIS ── */
+.disponiveis {
+  background: #e8f0e6;
+  border-left: 6px solid #d4af37;
+  margin: 30px 0 20px;
+  padding: 18px 24px;
+  border-radius: 8px;
+}
+.disponiveis h3 {
+  font-size: 1.3em;
+  color: #2c5e2a;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.disponiveis h3::before {
+  content: "📖";
+  font-size: 1.2em;
+}
+.lista-disponiveis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 10px;
+}
+.lista-disponiveis .livro-item {
+  background: #fff9ef;
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-width: 150px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.lista-disponiveis .livro-nome {
+  font-weight: bold;
+  color: #8b008b;
+  border-bottom: 1px solid #d4af37;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+}
+.lista-disponiveis .caps-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.lista-disponiveis .caps-links a {
+  display: inline-block;
+  background: #d4af37;
+  color: #000;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85em;
+  transition: background 0.15s;
+}
+.lista-disponiveis .caps-links a:hover {
+  background: #b8962e;
+}
 </style>
 </head>
 <body>
@@ -122,20 +181,29 @@ header p {
 </header>
  
 <div class="container">
-<div class="grade" id="grade"></div>
- 
-  <div style="margin: 50px 10px 40px; padding: 20px 28px; background: #f4efe6; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); font-size: 1.05em; line-height: 1.7; color: #2c1a0e;">
-    <p>A <strong>BÍBLIA INTERLINEAR [Grego Português]</strong> está sendo produzida para pesquisa e estudo profundo das Escrituras. Permite o acesso direto ao texto grego com tradução palavra por palavra. Espera-se que ajude os leitores, estudantes e tradutores a captar com mais precisão o verdadeiro sentido dos escritos sagrados.</p> <p>Este é um trabalho voluntário, abnegado e dedicado na produção de uma versão Interlinear da Bíblia Sagrada com base no texto <strong>Nestle 1904</strong>.</p>
-    <p style="margin-top: 14px;">Para facilitar o estudo: ao 'tocar' numa palavra grega, ela é destacada com outras iguais; ao lado da transliteração, os números são da sequência de Strong, linkados para abrir uma Concordância em Inglês.</p>
-<p style="margin-top: 14px;">Sugestões de melhorias serão apreciadas no e-mail <a href="mailto:interlinearnestle@gmail.com" style="color: blue;">interlinearnestle@gmail.com</a></p>
-</p>
-  </div>
- 
+  <div class="grade" id="grade"></div>
+
+<!-- SEÇÃO DINÂMICA: capítulos disponíveis (preenchida via JS) -->
+<div class="disponiveis" id="secao-disponiveis" style="display: none;">
+  <h3>Capítulos disponíveis para estudo</h3>
+  <div id="lista-disponiveis" class="lista-disponiveis"></div>
+  
+  <!-- Parágrafos extras (agora dentro da mesma caixa) -->
+  <p style="margin: 20px 0 8px 0; color: #555;">✅ <em>Em breve:</em> mais capítulos do Evangelho de João e outros livros do Novo Testamento.</p>
+  <p style="margin: 0 0 4px 0; font-size: 0.9em; color: #3a6b3a;">🔍 A busca na página do capítulo permite localizar e mostrar apenas os versículos com o termo pesquisado.</p>
 </div>
- 
-</script><script src="prontos.js"></script>
+
+  <div style="margin: 50px 10px 40px; padding: 20px 28px; background: #f4efe6; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); font-size: 1.05em; line-height: 1.7; color: #2c1a0e;">
+    <p>A <strong>BÍBLIA INTERLINEAR [Grego Português]</strong> está sendo produzida para pesquisa e estudo profundo das Escrituras. Permite o acesso direto ao texto grego com tradução palavra por palavra. Espera-se que ajude os leitores, estudantes e tradutores a captar com mais precisão o verdadeiro sentido dos escritos sagrados.</p>
+    <p>Este é um trabalho voluntário, abnegado e dedicado na produção de uma versão Interlinear da Bíblia Sagrada com base no texto <strong>Nestle 1904</strong>.</p>
+    <p style="margin-top: 14px;">Para facilitar o estudo: ao 'tocar' numa palavra grega, ela é destacada com outras iguais; ao lado da transliteração, os números são da sequência de Strong, linkados para abrir uma Concordância em Inglês.</p>
+    <p style="margin-top: 14px;">Sugestões de melhorias serão apreciadas no e-mail <a href="mailto:interlinearnestle@gmail.com" style="color: blue;">interlinearnestle@gmail.com</a></p>
+  </div>
+</div>
+
+<script src="prontos.js"></script>
 <script>
- 
+// Lista de livros (mesma usada nos cards)
 const livros = [
   { nome: "Mateus",            caps: 28, num: "01", id: "mateus"           },
   { nome: "Marcos",            caps: 16, num: "02", id: "marcos"           },
@@ -165,20 +233,21 @@ const livros = [
   { nome: "Judas",             caps:  1, num: "26", id: "judas"            },
   { nome: "Apocalipse",        caps: 22, num: "27", id: "apocalipse"       }
 ];
- 
+
+// --- 1) Construir os cards (como antes) ---
 const grade = document.getElementById("grade");
- 
+
 livros.forEach(livro => {
   const card = document.createElement("div");
   card.className = "card";
- 
+
   const nome = document.createElement("div");
   nome.className = "card-nome";
   nome.textContent = livro.nome;
- 
-  const caps = document.createElement("div");
-  caps.className = "card-caps";
- 
+
+  const capsDiv = document.createElement("div");
+  capsDiv.className = "card-caps";
+
   for (let c = 1; c <= livro.caps; c++) {
     const capStr = String(c).padStart(2, "0");
     const arquivo = "G" + livro.num + "_" + livro.id + "_" + capStr + ".html";
@@ -186,12 +255,12 @@ livros.forEach(livro => {
     const a = document.createElement("a");
     a.href = destino;
     a.textContent = c;
-    caps.appendChild(a);
+    capsDiv.appendChild(a);
   }
- 
+
   card.appendChild(nome);
-  card.appendChild(caps);
- 
+  card.appendChild(capsDiv);
+
   nome.addEventListener("click", () => {
     const jaAberto = card.classList.contains("aberto");
     document.querySelectorAll(".card.aberto").forEach(c => c.classList.remove("aberto"));
@@ -203,12 +272,69 @@ livros.forEach(livro => {
 
   grade.appendChild(card);
 });
+
+// --- 2) Construir a lista dinâmica de capítulos disponíveis (apenas os que existem) ---
+function gerarListaDisponiveis() {
+  const disponiveisPorLivro = {};
+
+  livros.forEach(livro => {
+    const disponiveis = [];
+    for (let c = 1; c <= livro.caps; c++) {
+      const capStr = String(c).padStart(2, "0");
+      const arquivo = "G" + livro.num + "_" + livro.id + "_" + capStr + ".html";
+      if (prontos.has(arquivo)) {
+        disponiveis.push(c);
+      }
+    }
+    if (disponiveis.length > 0) {
+      disponiveisPorLivro[livro.nome] = {
+        id: livro.id,
+        num: livro.num,
+        caps: disponiveis
+      };
+    }
+  });
+
+  const container = document.getElementById("lista-disponiveis");
+  const secao = document.getElementById("secao-disponiveis");
+  
+  if (Object.keys(disponiveisPorLivro).length === 0) {
+    secao.style.display = "none";
+    return;
+  }
+
+  secao.style.display = "block";
+  container.innerHTML = "";
+
+  for (const [nomeLivro, dados] of Object.entries(disponiveisPorLivro)) {
+    const livroDiv = document.createElement("div");
+    livroDiv.className = "livro-item";
+    
+    const nomeDiv = document.createElement("div");
+    nomeDiv.className = "livro-nome";
+    nomeDiv.textContent = nomeLivro;
+    
+    const capsLinks = document.createElement("div");
+    capsLinks.className = "caps-links";
+    
+    dados.caps.forEach(cap => {
+      const capStr = String(cap).padStart(2, "0");
+      const arquivo = "G" + dados.num + "_" + dados.id + "_" + capStr + ".html";
+      const link = document.createElement("a");
+      link.href = arquivo;
+      link.textContent = cap;
+      capsLinks.appendChild(link);
+    });
+    
+    livroDiv.appendChild(nomeDiv);
+    livroDiv.appendChild(capsLinks);
+    container.appendChild(livroDiv);
+  }
+}
+
+// Executa após o carregamento do prontos (que já está carregado)
+gerarListaDisponiveis();
 </script>
 
-
-      
-    </div>
-    </div>
-	
 </body>
 </html>
