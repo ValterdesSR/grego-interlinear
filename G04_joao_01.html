@@ -4835,17 +4835,53 @@ document.addEventListener("DOMContentLoaded", function () {
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const botao = document.getElementById('botao-inicio');
-  const navTop = document.getElementById('menu-versiculos');
+// Busca com ocultação de versículos
+(function() {
+  const searchBox = document.getElementById("searchBox");
+  if (!searchBox) {
+    console.error("Campo de busca #searchBox não encontrado!");
+    return;
+  }
 
-
-  });
-
-  botao.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-});
+  function buscar() {
+    const termo = searchBox.value.trim().toLowerCase();
+    
+    // Remove destaques anteriores
+    document.querySelectorAll(".busca-highlight").forEach(el => el.classList.remove("busca-highlight"));
+    
+    // Seleciona todos os versículos
+    const versiculos = document.querySelectorAll(".versiculo");
+    console.log("Versículos encontrados:", versiculos.length); // Para depuração
+    
+    // Primeiro, mostra todos
+    versiculos.forEach(v => v.style.display = "");
+    
+    if (termo === "") return;
+    
+    let algumResultado = false;
+    versiculos.forEach(vers => {
+      const textoCompleto = vers.innerText.toLowerCase();
+      if (textoCompleto.includes(termo)) {
+        algumResultado = true;
+        vers.style.display = "";
+        // Destaca as células que contêm o termo
+        vers.querySelectorAll(".celula").forEach(cel => {
+          if (cel.innerText.toLowerCase().includes(termo)) {
+            cel.classList.add("busca-highlight");
+          }
+        });
+      } else {
+        vers.style.display = "none";
+      }
+    });
+    
+    if (!algumResultado && termo !== "") {
+      console.log("Nenhum versículo encontrado para:", termo);
+    }
+  }
+  
+  searchBox.addEventListener("input", buscar);
+})();
 </script>
 
 <script>
