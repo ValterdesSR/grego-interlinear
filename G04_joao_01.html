@@ -244,7 +244,7 @@ body {
 
   <!-- INÍCIO do código dos números dos versículos  -------------------->
 
-<h1 style="margin:0;font-size:2.0em;"> João 1 </h1>
+<h1 id="titulo-capitulo" style="margin:0;font-size:2.0em;"></h1>
 
 <div id="menu-versiculos">
 <span class="link-versiculo" data-num="1">1</span>
@@ -4993,9 +4993,27 @@ const livros = {
 
 // Detecta livro e capítulo atual pelo nome do arquivo
 function detectarPaginaAtual() {
-  const arquivo = window.location.pathname.split('/').pop();
-  const match = arquivo.match(/^G(\d+)_([^_]+(?:_[^_]+)*)_(\d+)\.html$/i);
-  if (!match) return { livroNome: "Mateus", cap: 1 };
+  let caminho = window.location.pathname;
+  // Remove query string e hash
+  caminho = caminho.split('?')[0].split('#')[0];
+  const arquivo = caminho.split('/').pop();
+
+  // Regex flexível: aceita .html ou nenhuma extensão
+  const match = arquivo.match(/^G(\d+)_([^_]+(?:_[^_]+)*)_(\d+)(?:\.html)?$/i);
+  if (!match) {
+    // Fallback: tenta extrair do título fixo da página (ex.: <h1>João 1</h1>)
+    const tituloElem = document.querySelector('h1');
+    if (tituloElem && tituloElem.textContent) {
+      const partes = tituloElem.textContent.trim().split(/\s+/);
+      const livroCandidato = partes[0];
+      const capCandidato = parseInt(partes[1]);
+      if (livros[livroCandidato] && !isNaN(capCandidato)) {
+        return { livroNome: livroCandidato, cap: capCandidato };
+      }
+    }
+    return { livroNome: "Mateus", cap: 1 };
+  }
+
   const numLivro = parseInt(match[1]);
   const cap = parseInt(match[3]);
   const livroNome = Object.keys(livros).find(
@@ -5003,6 +5021,10 @@ function detectarPaginaAtual() {
   ) || "Mateus";
   return { livroNome, cap };
 }
+
+const { livroNome, cap } = detectarPaginaAtual();
+console.log(`Página detectada: ${livroNome} ${cap}`);
+
 
 function gerarNomeArquivo(livroNome, cap) {
   const info = livros[livroNome];
