@@ -4694,32 +4694,72 @@ function toggleTraducao() {
   document.querySelectorAll(".linha3").forEach(el => el.classList.toggle("oculto"));
 }
 
-// SCRIPT DE BUSCA CORRIGIDO (oculta versículos)
+// SCRIPT DE BUSCA - versão que funciona com a estrutura atual
 (function() {
-  const searchBox = document.getElementById('searchBox');
-  if (!searchBox) return;
-  function buscar() {
-    const termo = searchBox.value.trim().toLowerCase();
-    document.querySelectorAll('.busca-highlight').forEach(el => el.classList.remove('busca-highlight'));
-    const versiculos = document.querySelectorAll('.versiculo');
-    let temResultado = false;
-    versiculos.forEach(vers => {
-      const texto = vers.innerText.toLowerCase();
-      if (termo === '' || texto.includes(termo)) {
-        vers.style.display = '';
-        if (termo !== '') {
-          temResultado = true;
-          vers.querySelectorAll('.celula').forEach(cel => {
-            if (cel.innerText.toLowerCase().includes(termo)) cel.classList.add('busca-highlight');
-          });
+    const searchBox = document.getElementById('searchBox');
+    if (!searchBox) return;
+
+    // Função que agrupa células em versículos usando os números
+    function agruparVersiculos() {
+        const versiculos = [];
+        let celulas = Array.from(document.querySelectorAll('.celula'));
+        let versAtual = null;
+        
+        celulas.forEach(cel => {
+            const numeroSpan = cel.querySelector('.numero');
+            if (numeroSpan && numeroSpan.getAttribute('data-vers')) {
+                // Inicia um novo versículo
+                if (versAtual) versiculos.push(versAtual);
+                versAtual = { numero: numeroSpan.getAttribute('data-vers'), celulas: [cel] };
+            } else if (versAtual) {
+                versAtual.celulas.push(cel);
+            }
+        });
+        if (versAtual) versiculos.push(versAtual);
+        return versiculos;
+    }
+
+    function buscar() {
+        const termo = searchBox.value.trim().toLowerCase();
+        // Remove destaques
+        document.querySelectorAll('.busca-highlight').forEach(el => el.classList.remove('busca-highlight'));
+        
+        const versiculos = agruparVersiculos();
+        let algumResultado = false;
+        
+        versiculos.forEach(vers => {
+            // Pega todo o texto das células do versículo
+            const textoCompleto = vers.celulas.map(cel => cel.innerText.toLowerCase()).join(' ');
+            const contem = textoCompleto.includes(termo);
+            
+            if (termo === '' || contem) {
+                // Mostra cada célula
+                vers.celulas.forEach(cel => cel.style.display = '');
+                if (contem && termo !== '') {
+                    algumResultado = true;
+                    // Destaca células que contêm o termo
+                    vers.celulas.forEach(cel => {
+                        if (cel.innerText.toLowerCase().includes(termo)) {
+                            cel.classList.add('busca-highlight');
+                        }
+                    });
+                }
+            } else {
+                // Esconde todas as células deste versículo
+                vers.celulas.forEach(cel => cel.style.display = 'none');
+            }
+        });
+        
+        if (termo !== '' && !algumResultado) {
+            console.log('Nenhum versículo encontrado para: ' + termo);
         }
-      } else {
-        vers.style.display = 'none';
-      }
-    });
-  }
-  searchBox.addEventListener('input', buscar);
+    }
+    
+    searchBox.addEventListener('input', buscar);
+    console.log('Busca alternativa inicializada');
 })();
+
+
 
 // Scroll suave e highlight para os links do menu
 document.addEventListener("DOMContentLoaded", function () {
