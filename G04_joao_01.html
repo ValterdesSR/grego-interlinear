@@ -1,107 +1,86 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
 <meta charset="utf-8"/>
 <title>João 1 - Interlinear</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <style>
-
 .busca-highlight {
   background-color: yellow !important;
   border-radius: 4px;
   padding: 2px;
 }
-
-    body {
-      font-family: "Times New Roman", Times, serif;
-      margin: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h1 {
-      text-align: center;
-      text-transform: uppercase;
-      color: purple;
-      font-weight: bold;
-      margin-bottom: 24px;
-      font-size: 100%;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      gap: 20px;
-    }
-
-    .versiculo {
-      display: flex;
-      margin-bottom: 12px;
-    }
-
-
-    .grade {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .celula {
-      display: inline-block;
-      vertical-align: top;
-      margin: 4px;
-      padding: 2px;
-      box-sizing: border-box;
-    }
-
-    .linha1 {
-      color: blue;
-      font-style: italic;
-      font-size: 0.6em;
-    }
-
-    .linha2 {
-      color: black;
-      font-size: 1.0em;
-      font-weight: bold;
-    }
-
-    .linha3 {
-      color: purple;
-    }
-
-    .numero {
-      color: red;
-      font-weight: bold;
-    }
-
-    .grego span,
-    .c2 span {
-      cursor: pointer;
-    }
-
-    .highlight {
-      background-color: yellow;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: row;
-      }
-
-
-
-      .celula {
-        width: 100px;
-      }
-    }
-	#menu-versiculos {
+body {
+  font-family: "Times New Roman", Times, serif;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: purple;
+  font-weight: bold;
+  margin-bottom: 24px;
+  font-size: 100%;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+.versiculo {
+  display: flex;
+  margin-bottom: 12px;
+}
+.grade {
+  display: flex;
+  flex-wrap: wrap;
+}
+.celula {
+  display: inline-block;
+  vertical-align: top;
+  margin: 4px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.linha1 {
+  color: blue;
+  font-style: italic;
+  font-size: 0.6em;
+}
+.linha2 {
+  color: black;
+  font-size: 1.0em;
+  font-weight: bold;
+}
+.linha3 {
+  color: purple;
+}
+.numero {
+  color: red;
+  font-weight: bold;
+}
+.grego span, .c2 span {
+  cursor: pointer;
+}
+.highlight {
+  background-color: yellow;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+  .celula {
+    width: 100px;
+  }
+}
+#menu-versiculos {
   text-align: center;
   margin-bottom: 15px;
 }
-
 #menu-versiculos .link-versiculo {
   display: inline-block;
   margin: 2px 4px;
@@ -112,72 +91,59 @@
   color: darkblue;
   font-weight: bold;
 }
-
 #menu-versiculos .link-versiculo:hover {
   background-color: #eee;
 }
-
-  </style>
-<style>
 .tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
-
 .tooltip-icon {
-    color: #0077cc;
-    font-weight: bold;
-    margin-left: 5px;
-    font-size: 1.1em;
+  color: #0077cc;
+  font-weight: bold;
+  margin-left: 5px;
+  font-size: 1.1em;
 }
-
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 320px;
-    background-color: #fdfdfd;
-    color: #333;
-    text-align: left;
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
-    position: absolute;
-    z-index: 10;
-    top: 130%;  /* Agora a caixa aparece abaixo do ícone */
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 0.8em;  /* Texto menor */
-    line-height: 1.3em;
+  visibility: hidden;
+  width: 320px;
+  background-color: #fdfdfd;
+  color: #333;
+  text-align: left;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  z-index: 10;
+  top: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8em;
+  line-height: 1.3em;
 }
-
 .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
-
 .tooltip .tooltiptext::before {
-    content: "";
-    position: absolute;
-    bottom: 100%;  /* Seta na parte de cima da caixa */
-    left: 50%;
-    margin-left: -6px;
-    border-width: 6px;
-    border-style: solid;
-    border-color: transparent transparent #ccc transparent;
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #ccc transparent;
 }
-
 .tooltip .tooltiptext a {
-    color: #0077cc;
-    text-decoration: underline;
-    word-break: break-word;
+  color: #0077cc;
+  text-decoration: underline;
+  word-break: break-word;
 }
-
-
-</style>
-<style>
 #botao-inicio {
   position: fixed;
   bottom: 20px;
@@ -193,188 +159,107 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 1000;
 }
-</style>
-
-
-<script src="prontos.js"></script>
-</head>
-    
-<body>
-
-<header style="background: linear-gradient(45deg,#f7a3f7,#e4f7df);color:#f7b7f7;text-align:center;padding:40px 20px;border-bottom:4px solid #f7e4a3);
+#menu-versiculos {
   width: 100%;
-  margin: 0;
-  padding: 20px 0;
-}
-
-body {
-  margin: 0;
-}">
-
-<h1 style="margin:0;font-size:2.0em;"> Bíblia Interlinear</h1>
-<h1 style="margin:0;font-size:2.0em;">  Grego - Português</h1>
-
-<p style="font-style:italic;color:blue; font-size:1.5em;">NESTLE 1904 &bull; Transliteração &bull; Strong &bull; Tradução</p>
-</header>
-
-<div style="background:#e4f7df;padding:10px;display:flex;flex-wrap:wrap;gap:15px;justify-content:center;align-items:center;border-bottom:3px solid #d4af37;">
-
-<button onclick="window.location.href='index.html'" style="padding:15px 18px;background:#d4af37;border:none;border-radius:6px;font-weight:bold;cursor:pointer;">🏠 Início</button>
-
-<select id="livroSelect" style="padding:15px;border-radius:6px;"></select>
-<select id="capituloSelect" style="padding:15px;border-radius:6px;"></select>
-
-<button onclick="toggleTransliteracao()" style="padding:15px;border-radius:6px;cursor:pointer;">👁 Transliteração / Strong</button>
-<button onclick="toggleTraducao()" style="padding:15px;border-radius:6px;cursor:pointer;">👁 Tradução</button>
-
-<!-- Caixa de busca -->
-<div id="navegacao-topo" style="margin:0; text-align:center;">
-  <input
-    id="searchBox"
-    placeholder="Buscar ..."
-    type="text"
-    style="padding:15px; width:160px; border-radius:6px;"
-  >
-</div>
-
-</div>
-</div>
-</div>
-
-  <!-- INÍCIO do código dos números dos versículos  -------------------->
-
-<h1 id="titulo-capitulo" style="margin:0;font-size:2.0em;"></h1>
-
-<div id="menu-versiculos">
-<span class="link-versiculo" data-num="1">1</span>
-<span class="link-versiculo" data-num="2">2</span>
-<span class="link-versiculo" data-num="3">3</span>
-<span class="link-versiculo" data-num="4">4</span>
-<span class="link-versiculo" data-num="5">5</span>
-<span class="link-versiculo" data-num="6">6</span>
-<span class="link-versiculo" data-num="7">7</span>
-<span class="link-versiculo" data-num="8">8</span>
-<span class="link-versiculo" data-num="9">9</span>
-<span class="link-versiculo" data-num="10">10</span>
-<span class="link-versiculo" data-num="11">11</span>
-<span class="link-versiculo" data-num="12">12</span>
-<span class="link-versiculo" data-num="13">13</span>
-<span class="link-versiculo" data-num="14">14</span>
-<span class="link-versiculo" data-num="15">15</span>
-<span class="link-versiculo" data-num="16">16</span>
-<span class="link-versiculo" data-num="17">17</span>
-<span class="link-versiculo" data-num="18">18</span>
-<span class="link-versiculo" data-num="19">19</span>
-<span class="link-versiculo" data-num="20">20</span>
-<span class="link-versiculo" data-num="21">21</span>
-<span class="link-versiculo" data-num="22">22</span>
-<span class="link-versiculo" data-num="23">23</span>
-<span class="link-versiculo" data-num="24">24</span>
-<span class="link-versiculo" data-num="25">25</span>
-<span class="link-versiculo" data-num="26">26</span>
-<span class="link-versiculo" data-num="27">27</span>
-<span class="link-versiculo" data-num="28">28</span>
-<span class="link-versiculo" data-num="29">29</span>
-<span class="link-versiculo" data-num="30">30</span>
-<span class="link-versiculo" data-num="31">31</span>
-<span class="link-versiculo" data-num="32">32</span>
-<span class="link-versiculo" data-num="33">33</span>
-<span class="link-versiculo" data-num="34">34</span>
-<span class="link-versiculo" data-num="35">35</span>
-<span class="link-versiculo" data-num="36">36</span>
-<span class="link-versiculo" data-num="37">37</span>
-<span class="link-versiculo" data-num="38">38</span>
-<span class="link-versiculo" data-num="39">39</span>
-<span class="link-versiculo" data-num="40">40</span>
-<span class="link-versiculo" data-num="41">41</span>
-<span class="link-versiculo" data-num="42">42</span>
-<span class="link-versiculo" data-num="43">43</span>
-<span class="link-versiculo" data-num="44">44</span>
-<span class="link-versiculo" data-num="45">45</span>
-<span class="link-versiculo" data-num="46">46</span>
-<span class="link-versiculo" data-num="47">47</span>
-<span class="link-versiculo" data-num="48">48</span>
-<span class="link-versiculo" data-num="49">49</span>
-<span class="link-versiculo" data-num="50">50</span>
-<span class="link-versiculo" data-num="51">51</span>
-
-</div>
-
-</p>
-<style>
-
-#menu-versiculos{
-  width:100%;
-  background:#f0f7ed;
-  padding:10px 5px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
+  background: #f0f7ed;
+  padding: 10px 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
   transition: all 0.3s ease;
 }
-
-#menu-versiculos span{
-  color:#fff;
-  background:#e4f7df;
-  padding:6px 10px;
-  border-radius:5px;
-  cursor:pointer;
-  font-size:0.9em;
+#menu-versiculos span {
+  color: #fff;
+  background: #e4f7df;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
 }
-
-#menu-versiculos span:hover{
-  background:#d4af37;
-  color:#000;
+#menu-versiculos span:hover {
+  background: #d4af37;
+  color: #000;
 }
-
-/* estado fixo */
-.menu-fixo{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:9999;
-  box-shadow:0 3px 10px rgba(0,0,0,0.3);
+.menu-fixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
-
-/* espaço compensatório quando fixo */
-body.menu-compensado{
-  padding-top:70px;
+body.menu-compensado {
+  padding-top: 70px;
 }
-
-
-    #voltar-topo {
-      text-align: center;
-      margin: 20px 0;
-    }
-    #voltar-topo button {
-      background: purple;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    #voltar-topo button:hover {
-      background: #f0f7ed;
-    }
+#voltar-topo {
+  text-align: center;
+  margin: 20px 0;
+}
+#voltar-topo button {
+  background: purple;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+}
+#voltar-topo button:hover {
+  background: #f0f7ed;
+}
 .paragrafo {
   flex-basis: 100%;
   height: 0px;
   margin: 0px 0;
 }
-
 .oculto {
   display: none !important;
 }
-  </style>
-<div id="conteudo-interlinear">
-<div class="versiculo">
-<div class="texto-traducao">
-<div class="grade">
+#botao-topo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(128,0,128,0.5);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: none;
+  transition: 0.3s;
+  z-index: 999;
+}
+#botao-topo:hover {
+  background: rgba(128,0,128,0.8);
+}
+</style>
+</head>
+<body>
 
-<div class="conteudo-principal">
+<header style="background: linear-gradient(45deg,#f7a3f7,#e4f7df);color:#f7b7f7;text-align:center;padding:40px 20px;border-bottom:4px solid #f7e4a3); width:100%; margin:0; padding:20px 0;">
+<h1 style="margin:0;font-size:2.0em;">Bíblia Interlinear</h1>
+<h1 style="margin:0;font-size:2.0em;">Grego - Português</h1>
+<p style="font-style:italic;color:blue; font-size:1.5em;">NESTLE 1904 • Transliteração • Strong • Tradução</p>
+</header>
+
+<div style="background:#e4f7df;padding:10px;display:flex;flex-wrap:wrap;gap:15px;justify-content:center;align-items:center;border-bottom:3px solid #d4af37;">
+<button onclick="window.location.href='index.html'" style="padding:15px 18px;background:#d4af37;border:none;border-radius:6px;font-weight:bold;cursor:pointer;">🏠 Início</button>
+<select id="livroSelect" style="padding:15px;border-radius:6px;"></select>
+<select id="capituloSelect" style="padding:15px;border-radius:6px;"></select>
+<button onclick="toggleTransliteracao()" style="padding:15px;border-radius:6px;cursor:pointer;">👁 Transliteração / Strong</button>
+<button onclick="toggleTraducao()" style="padding:15px;border-radius:6px;cursor:pointer;">👁 Tradução</button>
+<div id="navegacao-topo" style="margin:0; text-align:center;">
+  <input id="searchBox" placeholder="Buscar ..." type="text" style="padding:15px; width:160px; border-radius:6px;">
+</div>
+</div>
+
+<h1 id="titulo-capitulo" style="margin:0;font-size:2.0em;"></h1>
+
+<div id="menu-versiculos">
+<span class="link-versiculo" data-num="1">1</span> <span class="link-versiculo" data-num="2">2</span> <span class="link-versiculo" data-num="3">3</span> <span class="link-versiculo" data-num="4">4</span> <span class="link-versiculo" data-num="5">5</span> <span class="link-versiculo" data-num="6">6</span> <span class="link-versiculo" data-num="7">7</span> <span class="link-versiculo" data-num="8">8</span> <span class="link-versiculo" data-num="9">9</span> <span class="link-versiculo" data-num="10">10</span> <span class="link-versiculo" data-num="11">11</span> <span class="link-versiculo" data-num="12">12</span> <span class="link-versiculo" data-num="13">13</span> <span class="link-versiculo" data-num="14">14</span> <span class="link-versiculo" data-num="15">15</span> <span class="link-versiculo" data-num="16">16</span> <span class="link-versiculo" data-num="17">17</span> <span class="link-versiculo" data-num="18">18</span> <span class="link-versiculo" data-num="19">19</span> <span class="link-versiculo" data-num="20">20</span> <span class="link-versiculo" data-num="21">21</span> <span class="link-versiculo" data-num="22">22</span> <span class="link-versiculo" data-num="23">23</span> <span class="link-versiculo" data-num="24">24</span> <span class="link-versiculo" data-num="25">25</span> <span class="link-versiculo" data-num="26">26</span> <span class="link-versiculo" data-num="27">27</span> <span class="link-versiculo" data-num="28">28</span> <span class="link-versiculo" data-num="29">29</span> <span class="link-versiculo" data-num="30">30</span> <span class="link-versiculo" data-num="31">31</span> <span class="link-versiculo" data-num="32">32</span> <span class="link-versiculo" data-num="33">33</span> <span class="link-versiculo" data-num="34">34</span> <span class="link-versiculo" data-num="35">35</span> <span class="link-versiculo" data-num="36">36</span> <span class="link-versiculo" data-num="37">37</span> <span class="link-versiculo" data-num="38">38</span> <span class="link-versiculo" data-num="39">39</span> <span class="link-versiculo" data-num="40">40</span> <span class="link-versiculo" data-num="41">41</span> <span class="link-versiculo" data-num="42">42</span> <span class="link-versiculo" data-num="43">43</span> <span class="link-versiculo" data-num="44">44</span> <span class="link-versiculo" data-num="45">45</span> <span class="link-versiculo" data-num="46">46</span> <span class="link-versiculo" data-num="47">47</span> <span class="link-versiculo" data-num="48">48</span> <span class="link-versiculo" data-num="49">49</span> <span class="link-versiculo" data-num="50">50</span> <span class="link-versiculo" data-num="51">51</span>
+</div>
+
+<div id="conteudo-interlinear" class="conteudo-principal">
 
   <!-- Fim do código padrão e INÍCIO dos versículos -->
   
@@ -4703,290 +4588,10 @@ body.menu-compensado{
 	
 </div>
 
-</div>
-
-
-</div>
-
-
-</div>
-
-<button id="botao-topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-⬆ ⬆
-</button>
+<button id="botao-topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ ⬆</button>
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function () {
-  function smoothScrollElementToTop(container, alvo) {
-    if (!alvo) return;
-    if (container && container !== document.body && container !== document.documentElement) {
-      const top = alvo.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
-      container.scrollTo({ top, behavior: 'smooth' });
-    } else {
-      const top = window.scrollY + alvo.getBoundingClientRect().top - 8;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  }
-
-  let destaqueTimeout = null;
-  function highlightCelulas(celulas) {
-    document.querySelectorAll('.celula .linha3.highlight').forEach(el => el.classList.remove('highlight'));
-    if (destaqueTimeout) { clearTimeout(destaqueTimeout); destaqueTimeout = null; }
-
-    celulas.forEach(c => {
-      const linha3 = c.querySelector('.linha3') || c;
-      if (linha3) linha3.classList.add('highlight');
-    });
-
-    destaqueTimeout = setTimeout(() => {
-      celulas.forEach(c => {
-        const linha3 = c.querySelector('.linha3') || c;
-        if (linha3) linha3.classList.remove('highlight');
-      });
-      destaqueTimeout = null;
-    }, 3000);
-  }
-
-  function collectVerseCelulas(startCelula) {
-    const out = [];
-    if (!startCelula) return out;
-    let el = startCelula;
-    out.push(el);
-    while (el && el.nextElementSibling) {
-      const next = el.nextElementSibling;
-      if (next.querySelector && next.querySelector('.numero')) break;
-      out.push(next);
-      el = next;
-    }
-    return out;
-  }
-
-  const navLinks = document.querySelectorAll('#menu-versiculos .link-versiculo');
-  navLinks.forEach(link => {
-    const handler = (ev) => {
-      ev.preventDefault();
-      const num = link.getAttribute('data-num');
-      if (!num) return;
-
-      const spanNumero = document.querySelector(`.numero[data-vers="${num}"]`);
-      if (!spanNumero) return;
-
-      const celulaStart = spanNumero.closest('.celula') || spanNumero.parentElement;
-      if (!celulaStart) {
-        smoothScrollElementToTop(document.body, spanNumero);
-        spanNumero.classList.add('highlight');
-        setTimeout(() => spanNumero.classList.remove('highlight'), 3000);
-        return;
-      }
-
-      let scrollContainer = celulaStart.closest('.coluna');
-      if (!scrollContainer) {
-        let anc = celulaStart.parentElement;
-        while (anc && anc !== document.body) {
-          const style = window.getComputedStyle(anc);
-          if (/(auto|scroll)/.test(style.overflowY)) { scrollContainer = anc; break; }
-          anc = anc.parentElement;
-        }
-      }
-
-      smoothScrollElementToTop(scrollContainer || document.body, celulaStart);
-
-      const celulasDoVersiculo = collectVerseCelulas(celulaStart);
-      highlightCelulas(celulasDoVersiculo);
-    };
-
-    link.addEventListener('click', handler, { passive: false });
-    link.addEventListener('touchend', function(e){ handler(e); }, { passive: true });
-  });
-});
-</script>
-
-<button id="botao-inicio" title="Voltar ao início">Início</button>
-
-<style>
-#botao-topo{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(128,0,128,0.5);
-  color: white;
-  border: none;
-  padding: 12px 16px;
-  border-radius: 50px;
-  cursor: pointer;
-  display: none;
-  transition: 0.3s;
-  z-index: 999;
-}
-
-#botao-topo:hover{
-  background: rgba(128,0,128,0.8);
-}
-</style>
-
-<script>
-// Busca com ocultação de versículos
-(function() {
-  const searchBox = document.getElementById("searchBox");
-  if (!searchBox) {
-    console.error("Campo de busca #searchBox não encontrado!");
-    return;
-  }
-
-  function buscar() {
-    const termo = searchBox.value.trim().toLowerCase();
-    
-    // Remove destaques anteriores
-    document.querySelectorAll(".busca-highlight").forEach(el => el.classList.remove("busca-highlight"));
-    
-    // Seleciona todos os versículos
-    const versiculos = document.querySelectorAll(".versiculo");
-    console.log("Versículos encontrados:", versiculos.length); // Para depuração
-    
-    // Primeiro, mostra todos
-    versiculos.forEach(v => v.style.display = "");
-    
-    if (termo === "") return;
-    
-    let algumResultado = false;
-    versiculos.forEach(vers => {
-      const textoCompleto = vers.innerText.toLowerCase();
-      if (textoCompleto.includes(termo)) {
-        algumResultado = true;
-        vers.style.display = "";
-        // Destaca as células que contêm o termo
-        vers.querySelectorAll(".celula").forEach(cel => {
-          if (cel.innerText.toLowerCase().includes(termo)) {
-            cel.classList.add("busca-highlight");
-          }
-        });
-      } else {
-        vers.style.display = "none";
-      }
-    });
-    
-    if (!algumResultado && termo !== "") {
-      console.log("Nenhum versículo encontrado para:", termo);
-    }
-  }
-  
-  searchBox.addEventListener("input", buscar);
-})();
-</script>
-
-<script>
-document.querySelectorAll('.linha2 span[data-id]').forEach(span => {
-  span.addEventListener('mouseenter', () => {
-    const palavra = span.getAttribute('data-id');
-    document.querySelectorAll(`.linha2 span[data-id='${palavra}']`)
-      .forEach(el => el.classList.add('highlight'));
-  });
-
-  span.addEventListener('mouseleave', () => {
-    document.querySelectorAll('.linha2 span.highlight')
-      .forEach(el => el.classList.remove('highlight'));
-  });
-
-  // Suporte para toque em telas móveis
-  span.addEventListener('click', () => {
-    const palavra = span.getAttribute('data-id');
-    const jaAtivo = span.classList.contains('highlight');
-    document.querySelectorAll('.linha2 span.highlight')
-      .forEach(el => el.classList.remove('highlight'));
-    if (!jaAtivo) {
-      document.querySelectorAll(`.linha2 span[data-id='${palavra}']`)
-        .forEach(el => el.classList.add('highlight'));
-    }
-  });
-});
-  // transforma número Strong em link
-  document.querySelectorAll('.linha1').forEach(el => {
-    const match = el.textContent.match(/(.*?)(\d{1,5})$/);
-    if (match) {
-      const texto = match[1].trim();
-      const numero = match[2];
-      el.innerHTML = `${texto} <a href="https://biblehub.com/greek/${numero}.htm" target="_blank" rel="noopener noreferrer">${numero}</a>`;
-    }
-  });
-</script>
-
-<script>
-function toggleTodasLinha1() {
-  const linhas = document.querySelectorAll(".linha1");
-
-  linhas.forEach(linha => {
-    if (linha.style.display === "none") {
-      linha.style.display = "block";
-    } else {
-      linha.style.display = "none";
-    }
-  });
-}
-</script>
-
-<script>
-function toggleTodasLinha3() {
-  const linhas = document.querySelectorAll(".linha3");
-
-  linhas.forEach(linha => {
-    if (linha.style.display === "none") {
-      linha.style.display = "block";
-    } else {
-      linha.style.display = "none";
-    }
-  });
-}
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const box = document.getElementById("searchBox");
-
-  box.addEventListener("input", function () {
-
-    const termo = this.value.trim().toLowerCase();
-
-    // limpar destaques
-    document.querySelectorAll(".busca-highlight").forEach(e => e.classList.remove("busca-highlight"));
-
-    // mostrar todos os versículos antes de aplicar o filtro
-    document.querySelectorAll(".versiculo").forEach(v => {
-      v.style.display = "";   // volta ao normal
-    });
-
-    if (termo === "") return;
-
-    // filtrar e destacar
-    document.querySelectorAll(".versiculo").forEach(vers => {
-
-      const textoVers = vers.innerText.toLowerCase();
-
-      if (!textoVers.includes(termo)) {
-        // esconder versículo sem match
-        vers.style.display = "none";
-        return;
-      }
-
-      // mostrar versículo com resultado
-      vers.style.display = "";
-
-      // destacar células que contêm o termo
-      vers.querySelectorAll(".celula").forEach(cel => {
-        if (cel.innerText.toLowerCase().includes(termo)) {
-          cel.classList.add("busca-highlight");
-        }
-      });
-    });
-
-  });
-
-});
-</script>
-
-<script>
-
+// Objeto livros (mesmo do seu código)
 const livros = {
   "Mateus":            { num: "01", id: "mateus",            caps: 28 },
   "Marcos":            { num: "02", id: "marcos",            caps: 16 },
@@ -5017,17 +4622,13 @@ const livros = {
   "Apocalipse":        { num: "27", id: "apocalipse",        caps: 22 }
 };
 
-// Detecta livro e capítulo atual pelo nome do arquivo
+// Função detectarPaginaAtual (corrigida para Netlify)
 function detectarPaginaAtual() {
   let caminho = window.location.pathname;
-  // Remove query string e hash
   caminho = caminho.split('?')[0].split('#')[0];
   const arquivo = caminho.split('/').pop();
-
-  // Regex flexível: aceita .html ou nenhuma extensão
   const match = arquivo.match(/^G(\d+)_([^_]+(?:_[^_]+)*)_(\d+)(?:\.html)?$/i);
   if (!match) {
-    // Fallback: tenta extrair do título fixo da página (ex.: <h1>João 1</h1>)
     const tituloElem = document.querySelector('h1');
     if (tituloElem && tituloElem.textContent) {
       const partes = tituloElem.textContent.trim().split(/\s+/);
@@ -5039,38 +4640,18 @@ function detectarPaginaAtual() {
     }
     return { livroNome: "Mateus", cap: 1 };
   }
-
   const numLivro = parseInt(match[1]);
   const cap = parseInt(match[3]);
-  const livroNome = Object.keys(livros).find(
-    l => parseInt(livros[l].num) === numLivro
-  ) || "Mateus";
+  const livroNome = Object.keys(livros).find(l => parseInt(livros[l].num) === numLivro) || "Mateus";
   return { livroNome, cap };
 }
 
-const { livroNome, cap } = detectarPaginaAtual();
-console.log(`Página detectada: ${livroNome} ${cap}`);
-
-
-function gerarNomeArquivo(livroNome, cap) {
-  const info = livros[livroNome];
-  const nomeSimples = livroNome
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "");
-  const capStr = String(cap).padStart(2, "0");
-  return "G" + info.num + "_" + nomeSimples + "_" + capStr + ".html";
-}
+// Preenche selects e título
+const { livroNome: livroAtual, cap: capAtual } = detectarPaginaAtual();
+document.getElementById("titulo-capitulo").textContent = livroAtual + " " + capAtual;
 
 const livroSelect = document.getElementById("livroSelect");
 const capituloSelect = document.getElementById("capituloSelect");
-const { livroNome: livroAtual, cap: capAtual } = detectarPaginaAtual();
-
-// Preenche título dinamicamente
-const h1Titulo = document.getElementById("titulo-capitulo");
-if (h1Titulo) h1Titulo.textContent = livroAtual + " " + capAtual;
-
-// Preenche select de livros
 for (let livro in livros) {
   let opt = document.createElement("option");
   opt.value = livro;
@@ -5078,7 +4659,6 @@ for (let livro in livros) {
   if (livro === livroAtual) opt.selected = true;
   livroSelect.appendChild(opt);
 }
-
 function preencherCapitulos(livro, capSelecionado) {
   capituloSelect.innerHTML = "";
   for (let i = 1; i <= livros[livro].caps; i++) {
@@ -5091,72 +4671,160 @@ function preencherCapitulos(livro, capSelecionado) {
 }
 preencherCapitulos(livroAtual, capAtual);
 
-livroSelect.addEventListener("change", function () {
-  preencherCapitulos(this.value, 1);
+livroSelect.addEventListener("change", function() {
   const arquivo = gerarNomeArquivo(this.value, 1);
-  const destino = prontos.has(arquivo) ? arquivo : "em_construcao.html";
-  window.location.href = destino;
+  window.location.href = prontos.has(arquivo) ? arquivo : "em_construcao.html";
 });
-
-capituloSelect.addEventListener("change", function () {
+capituloSelect.addEventListener("change", function() {
   const arquivo = gerarNomeArquivo(livroSelect.value, parseInt(this.value));
-  const destino = prontos.has(arquivo) ? arquivo : "em_construcao.html";
-  window.location.href = destino;
+  window.location.href = prontos.has(arquivo) ? arquivo : "em_construcao.html";
 });
 
-function toggleTransliteracao(){
- document.querySelectorAll(".transliteracao, .strong").forEach(el=>{
-   el.style.display = (el.style.display==="none") ? "" : "none";
- });
+function gerarNomeArquivo(livroNome, cap) {
+  const info = livros[livroNome];
+  const nomeSimples = livroNome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+  const capStr = String(cap).padStart(2, "0");
+  return "G" + info.num + "_" + nomeSimples + "_" + capStr + ".html";
 }
 
-function toggleTraducao(){
- document.querySelectorAll(".traducao").forEach(el=>{
-   el.style.display = (el.style.display==="none") ? "" : "none";
- });
+function toggleTransliteracao() {
+  document.querySelectorAll(".linha1").forEach(el => el.classList.toggle("oculto"));
+}
+function toggleTraducao() {
+  document.querySelectorAll(".linha3").forEach(el => el.classList.toggle("oculto"));
 }
 
-</script>
-
-<script src="prontos.js"></script>
-
-<script>
-
-function toggleTransliteracao(){
-  document.querySelectorAll(".linha1").forEach(function(el){
-    el.classList.toggle("oculto");
-  });
-}
-
-function toggleTraducao(){
-  document.querySelectorAll(".linha3").forEach(function(el){
-    el.classList.toggle("oculto");
-  });
-}
-
-</script>
-
-<script>
-
-const menu = document.getElementById("menu-versiculos");
-const posicaoOriginal = menu.offsetTop;
-
-window.addEventListener("scroll", function() {
-
-  const menu = document.getElementById("menu-versiculos");
-  const botao = document.getElementById("botao-topo");
-
-  if(window.scrollY > 200){
-    menu.classList.add("fixo");
-    botao.style.display = "block";
-  } else {
-    menu.classList.remove("fixo");
-    botao.style.display = "none";
+// SCRIPT DE BUSCA CORRIGIDO (oculta versículos)
+(function() {
+  const searchBox = document.getElementById('searchBox');
+  if (!searchBox) return;
+  function buscar() {
+    const termo = searchBox.value.trim().toLowerCase();
+    document.querySelectorAll('.busca-highlight').forEach(el => el.classList.remove('busca-highlight'));
+    const versiculos = document.querySelectorAll('.versiculo');
+    let temResultado = false;
+    versiculos.forEach(vers => {
+      const texto = vers.innerText.toLowerCase();
+      if (termo === '' || texto.includes(termo)) {
+        vers.style.display = '';
+        if (termo !== '') {
+          temResultado = true;
+          vers.querySelectorAll('.celula').forEach(cel => {
+            if (cel.innerText.toLowerCase().includes(termo)) cel.classList.add('busca-highlight');
+          });
+        }
+      } else {
+        vers.style.display = 'none';
+      }
+    });
   }
+  searchBox.addEventListener('input', buscar);
+})();
 
+// Scroll suave e highlight para os links do menu
+document.addEventListener("DOMContentLoaded", function () {
+  function smoothScrollElementToTop(container, alvo) {
+    if (!alvo) return;
+    if (container && container !== document.body && container !== document.documentElement) {
+      const top = alvo.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
+      container.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      const top = window.scrollY + alvo.getBoundingClientRect().top - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+  function collectVerseCelulas(startCelula) {
+    const out = [];
+    if (!startCelula) return out;
+    let el = startCelula;
+    out.push(el);
+    while (el && el.nextElementSibling) {
+      const next = el.nextElementSibling;
+      if (next.querySelector && next.querySelector('.numero')) break;
+      out.push(next);
+      el = next;
+    }
+    return out;
+  }
+  function highlightCelulas(celulas) {
+    document.querySelectorAll('.celula .linha3.highlight').forEach(el => el.classList.remove('highlight'));
+    celulas.forEach(c => {
+      const linha3 = c.querySelector('.linha3') || c;
+      if (linha3) linha3.classList.add('highlight');
+    });
+    setTimeout(() => {
+      celulas.forEach(c => {
+        const linha3 = c.querySelector('.linha3') || c;
+        if (linha3) linha3.classList.remove('highlight');
+      });
+    }, 3000);
+  }
+  const navLinks = document.querySelectorAll('#menu-versiculos .link-versiculo');
+  navLinks.forEach(link => {
+    link.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const num = link.getAttribute('data-num');
+      if (!num) return;
+      const spanNumero = document.querySelector(`.numero[data-vers="${num}"]`);
+      if (!spanNumero) return;
+      const celulaStart = spanNumero.closest('.celula') || spanNumero.parentElement;
+      if (!celulaStart) {
+        smoothScrollElementToTop(document.body, spanNumero);
+        spanNumero.classList.add('highlight');
+        setTimeout(() => spanNumero.classList.remove('highlight'), 3000);
+        return;
+      }
+      let scrollContainer = celulaStart.closest('.coluna');
+      if (!scrollContainer) {
+        let anc = celulaStart.parentElement;
+        while (anc && anc !== document.body) {
+          const style = window.getComputedStyle(anc);
+          if (/(auto|scroll)/.test(style.overflowY)) { scrollContainer = anc; break; }
+          anc = anc.parentElement;
+        }
+      }
+      smoothScrollElementToTop(scrollContainer || document.body, celulaStart);
+      const celulasDoVersiculo = collectVerseCelulas(celulaStart);
+      highlightCelulas(celulasDoVersiculo);
+    });
+  });
 });
 
+// Botão de voltar ao topo
+window.addEventListener("scroll", function() {
+  const botao = document.getElementById("botao-topo");
+  if (window.scrollY > 200) botao.style.display = "block";
+  else botao.style.display = "none";
+});
+
+// Transforma números Strong em links
+document.querySelectorAll('.linha1').forEach(el => {
+  const match = el.textContent.match(/(.*?)(\d{1,5})$/);
+  if (match) {
+    const texto = match[1].trim();
+    const numero = match[2];
+    el.innerHTML = `${texto} <a href="https://biblehub.com/greek/${numero}.htm" target="_blank" rel="noopener noreferrer">${numero}</a>`;
+  }
+});
+
+// Highlight ao passar mouse sobre palavras gregas
+document.querySelectorAll('.linha2 span[data-id]').forEach(span => {
+  span.addEventListener('mouseenter', () => {
+    const palavra = span.getAttribute('data-id');
+    document.querySelectorAll(`.linha2 span[data-id='${palavra}']`).forEach(el => el.classList.add('highlight'));
+  });
+  span.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.linha2 span.highlight').forEach(el => el.classList.remove('highlight'));
+  });
+});
 </script>
-
-
-</body></html>
+<script>
+// Carrega prontos.js apenas uma vez (se existir)
+if (typeof prontos === 'undefined') {
+  var script = document.createElement('script');
+  script.src = 'prontos.js';
+  document.head.appendChild(script);
+}
+</script>
+</body>
+</html>
