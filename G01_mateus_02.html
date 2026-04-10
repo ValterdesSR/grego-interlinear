@@ -1,0 +1,3438 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<title>Mateus 2 - Interlinear</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+.busca-highlight {
+  background-color: yellow !important;
+  border-radius: 4px;
+  padding: 2px;
+}
+body {
+  font-family: "Times New Roman", Times, serif;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: purple;
+  font-weight: bold;
+  margin-bottom: 24px;
+  font-size: 100%;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+.versiculo {
+  display: flex;
+  margin-bottom: 12px;
+}
+.grade {
+  display: flex;
+  flex-wrap: wrap;
+}
+.celula {
+  display: inline-block;
+  vertical-align: top;
+  margin: 4px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.linha1 {
+  color: blue;
+  font-style: italic;
+  font-size: 0.6em;
+}
+.linha2 {
+  color: black;
+  font-size: 1.0em;
+  font-weight: bold;
+}
+.linha3 {
+  color: purple;
+}
+.numero {
+  color: red;
+  font-weight: bold;
+}
+.grego span, .c2 span {
+  cursor: pointer;
+}
+.highlight {
+  background-color: yellow;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+  .celula {
+    width: 100px;
+  }
+}
+#menu-versiculos {
+  text-align: center;
+  margin-bottom: 15px;
+}
+#menu-versiculos .link-versiculo {
+  display: inline-block;
+  margin: 2px 4px;
+  padding: 4px 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  color: darkblue;
+  font-weight: bold;
+}
+#menu-versiculos .link-versiculo:hover {
+  background-color: #eee;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.tooltip-icon {
+  color: #0077cc;
+  font-weight: bold;
+  margin-left: 5px;
+  font-size: 1.1em;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 320px;
+  background-color: #fdfdfd;
+  color: #333;
+  text-align: left;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  z-index: 10;
+  top: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8em;
+  line-height: 1.3em;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip .tooltiptext::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #ccc transparent;
+}
+.tooltip .tooltiptext a {
+  color: #0077cc;
+  text-decoration: underline;
+  word-break: break-word;
+}
+#botao-inicio {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(128, 0, 128, 0.7);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  display: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+#menu-versiculos {
+  width: 100%;
+  background: #f0f7ed;
+  padding: 10px 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+#menu-versiculos span {
+  color: #fff;
+  background: #e4f7df;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+#menu-versiculos span:hover {
+  background: #d4af37;
+  color: #000;
+}
+.menu-fixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+body.menu-compensado {
+  padding-top: 70px;
+}
+#voltar-topo {
+  text-align: center;
+  margin: 20px 0;
+}
+#voltar-topo button {
+  background: purple;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+}
+#voltar-topo button:hover {
+  background: #f0f7ed;
+}
+.paragrafo {
+  flex-basis: 100%;
+  height: 0px;
+  margin: 0px 0;
+}
+.oculto {
+  display: none !important;
+}
+#botao-topo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(128,0,128,0.5);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: none;
+  transition: 0.3s;
+  z-index: 999;
+}
+#botao-topo:hover {
+  background: rgba(128,0,128,0.8);
+}
+</style>
+</head>
+<body>
+
+<header style="background: linear-gradient(45deg,#f7a3f7,#e4f7df);color:#f7b7f7;text-align:center;padding:40px 20px;border-bottom:4px solid #f7e4a3); width:100%; margin:0; padding:20px 0;">
+<h1 style="margin:0;font-size:2.0em;">Bíblia Interlinear</h1>
+<h1 style="margin:0;font-size:2.0em;">Grego - Português</h1>
+<p style="font-style:italic;color:blue; font-size:1.5em;">NESTLE 1904 • Transliteração • Strong • Tradução</p>
+</header>
+
+<div style="background:#e4f7df;padding:10px;display:flex;flex-wrap:wrap;gap:15px;justify-content:center;align-items:center;border-bottom:3px solid #d4af37;">
+<button onclick="window.location.href='index.html'" style="padding:15px 18px;background:#d4af37;border:none;border-radius:6px;font-weight:bold;cursor:pointer;">🏠 Início</button>
+<select id="livroSelect" style="padding:15px;border-radius:6px;"></select>
+<select id="capituloSelect" style="padding:15px;border-radius:6px;"></select>
+<button onclick="toggleTransliteracao()" style="padding:15px;border-radius:6px;cursor:pointer;">👁 Transliteração / Strong</button>
+<button onclick="toggleTraducao()" style="padding:15px;border-radius:6px;cursor:pointer;">👁 Tradução</button>
+<div id="navegacao-topo" style="margin:0; text-align:center;">
+  <input id="searchBox" placeholder="Buscar ..." type="text" style="padding:15px; width:160px; border-radius:6px;">
+</div>
+</div>
+
+<h1 id="titulo-capitulo" style="margin:0;font-size:2.0em;"></h1>
+
+<div id="menu-versiculos">
+<span class="link-versiculo" data-num="1">1</span> <span class="link-versiculo" data-num="2">2</span> <span class="link-versiculo" data-num="3">3</span> <span class="link-versiculo" data-num="4">4</span> <span class="link-versiculo" data-num="5">5</span> <span class="link-versiculo" data-num="6">6</span> <span class="link-versiculo" data-num="7">7</span> <span class="link-versiculo" data-num="8">8</span> <span class="link-versiculo" data-num="9">9</span> <span class="link-versiculo" data-num="10">10</span> <span class="link-versiculo" data-num="11">11</span> <span class="link-versiculo" data-num="12">12</span> <span class="link-versiculo" data-num="13">13</span> <span class="link-versiculo" data-num="14">14</span> <span class="link-versiculo" data-num="15">15</span> <span class="link-versiculo" data-num="16">16</span> <span class="link-versiculo" data-num="17">17</span> <span class="link-versiculo" data-num="18">18</span> <span class="link-versiculo" data-num="19">19</span> <span class="link-versiculo" data-num="20">20</span> <span class="link-versiculo" data-num="21">21</span> <span class="link-versiculo" data-num="22">22</span> <span class="link-versiculo" data-num="23">23</span>
+</div>
+
+<div id="conteudo-interlinear" class="conteudo-principal">
+
+  <!-- Fim do código padrão e INÍCIO dos versículos -->
+
+  
+<!-- ==================== MATEUS 2:1 ==================== -->
+
+  <div class="versiculo">
+    <div class="texto-traducao">
+      <div class="grade">
+
+<div class="celula">
+  <div class="linha1">Tou 3588</div>
+  <div class="linha2"><span data-id="Τοῦ">1 Τοῦ</span></div>
+  <div class="linha3"><span class="numero" data-vers="1">1</span> O,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Iēsou 2424</div>
+  <div class="linha2"><span data-id="Ἰησοῦ">Ἰησοῦ</span></div>
+  <div class="linha3">Jesus,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gennēthentos 1080</div>
+  <div class="linha2"><span data-id="γεννηθέντος">γεννηθέντος</span></div>
+  <div class="linha3">nasceu</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Bethleem 965</div>
+  <div class="linha2"><span data-id="Βηθλεὲμ">Βηθλεὲμ</span></div>
+  <div class="linha3">Belém</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēs 3588</div>
+  <div class="linha2"><span data-id="τῆς">τῆς</span></div>
+  <div class="linha3">da</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Ioudaias 2453</div>
+  <div class="linha2"><span data-id="Ἰουδαίας">Ἰουδαίας</span></div>
+  <div class="linha3">Judeia</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">nos </div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hēmerais 2250</div>
+  <div class="linha2"><span data-id="ἡμέραις">ἡμέραις</span></div>
+  <div class="linha3">dias [de]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōdou 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδου">Ἡρῴδου</span></div>
+  <div class="linha3">Herodes,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">basileōs 935</div>
+  <div class="linha2"><span data-id="βασιλέως">βασιλέως</span></div>
+  <div class="linha3">rei.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">idou 2400</div>
+  <div class="linha2"><span data-id="ἰδοὺ">ἰδοὺ</span></div>
+  <div class="linha3">De repente,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">magoi 3097</div>
+  <div class="linha2"><span data-id="μάγοι">μάγοι</span></div>
+  <div class="linha3">magos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">apo 575</div>
+  <div class="linha2"><span data-id="ἀπὸ">ἀπὸ</span></div>
+  <div class="linha3">desde [o]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anatolōn 395</div>
+  <div class="linha2"><span data-id="ἀνατολῶν">ἀνατολῶν</span></div>
+  <div class="linha3">oriente</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paregenonto 3854</div>
+  <div class="linha2"><span data-id="παρεγένοντο">παρεγένοντο</span></div>
+  <div class="linha3">chegaram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hierosolyma 2414</div>
+  <div class="linha2"><span data-id="Ἱεροσόλυμα">Ἱεροσόλυμα</span></div>
+  <div class="linha3">Jerusalém,</div>
+</div>
+
+
+<!-- ==================== MATEUS 2:2 ==================== -->
+<div class="celula">
+  <div class="linha1">legontes 3004</div>
+  <div class="linha2"><span data-id="λέγοντες">2 λέγοντες</span></div>
+  <div class="linha3"><span class="numero" data-vers="2">2</span> dizendo:</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Pou 4226</div>
+  <div class="linha2"><span data-id="Ποῦ">Ποῦ</span></div>
+  <div class="linha3">"Onde</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">estin 1510</div>
+  <div class="linha2"><span data-id="ἐστιν">ἐστιν</span></div>
+  <div class="linha3">está</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ho 3588</div>
+  <div class="linha2"><span data-id="ὁ">ὁ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">techtheis 5088</div>
+  <div class="linha2"><span data-id="τεχθεὶς">τεχθεὶς</span></div>
+  <div class="linha3">recém-nascido</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">basileus 935</div>
+  <div class="linha2"><span data-id="βασιλεὺς">βασιλεὺς</span></div>
+  <div class="linha3">rei</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tōn 3588</div>
+  <div class="linha2"><span data-id="τῶν">τῶν</span></div>
+  <div class="linha3">dos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Ioudaiōn 2453</div>
+  <div class="linha2"><span data-id="Ἰουδαίων">Ἰουδαίων</span></div>
+  <div class="linha3">judeus?</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eidomen 1492</div>
+  <div class="linha2"><span data-id="εἴδομεν">εἴδομεν</span></div>
+  <div class="linha3">Vimos,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gar 1063</div>
+  <div class="linha2"><span data-id="γὰρ">γὰρ</span></div>
+  <div class="linha3">pois,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">astera 792</div>
+  <div class="linha2"><span data-id="ἀστέρα">ἀστέρα</span></div>
+  <div class="linha3">estrela</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tē 3588</div>
+  <div class="linha2"><span data-id="τῇ">τῇ</span></div>
+  <div class="linha3">o [no]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anatolē 395</div>
+  <div class="linha2"><span data-id="ἀνατολῇ">ἀνατολῇ</span></div>
+  <div class="linha3">oriente,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēlthomen 2064</div>
+  <div class="linha2"><span data-id="ἤλθομεν">ἤλθομεν</span></div>
+  <div class="linha3">viemos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">proskynēsai 4352</div>
+  <div class="linha2"><span data-id="προσκυνῆσαι">προσκυνῆσαι</span></div>
+  <div class="linha3">homenagear</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autō 846</div>
+  <div class="linha2"><span data-id="αὐτῷ">αὐτῷ</span></div>
+  <div class="linha3">a ele".</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:1 ===== -->
+<div class="celula">
+  <div class="linha1">akousas 191</div>
+  <div class="linha2"><span data-id="ἀκούσας">3 ἀκούσας</span></div>
+  <div class="linha3"><span class="numero" data-vers="3">3</span> Ao ouvir</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">isso,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ho 3588</div>
+  <div class="linha2"><span data-id="ὁ">ὁ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">basileus 935</div>
+  <div class="linha2"><span data-id="βασιλεὺς">βασιλεὺς</span></div>
+  <div class="linha3">rei</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōidēs 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδης">Ἡρῴδης</span></div>
+  <div class="linha3">Herodes</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">etarachthē 5015</div>
+  <div class="linha2"><span data-id="ἐταράχθη">ἐταράχθη</span></div>
+  <div class="linha3">ficou nervoso</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pasa 3956</div>
+  <div class="linha2"><span data-id="πᾶσα">πᾶσα</span></div>
+  <div class="linha3">toda [a]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hierosolyma 2414</div>
+  <div class="linha2"><span data-id="Ἱεροσόλυμα">Ἱεροσόλυμα</span></div>
+  <div class="linha3">Jerusalém</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">met’ 3326</div>
+  <div class="linha2"><span data-id="μετ’">μετ’</span></div>
+  <div class="linha3">com</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">ele.</div>
+</div>
+
+
+<!-- =================================== MATEUS 2:4 -->
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">4 καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="4">4 </span>E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">synagagōn 4863</div>
+  <div class="linha2"><span data-id="συναγαγὼν">συναγαγὼν</span></div>
+  <div class="linha3">convocou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pantas 3956</div>
+  <div class="linha2"><span data-id="πάντας">πάντας</span></div>
+  <div class="linha3">todos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tous 3588</div>
+  <div class="linha2"><span data-id="τοὺς">τοὺς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">archiereis 749</div>
+  <div class="linha2"><span data-id="ἀρχιερεῖς">ἀρχιερεῖς</span></div>
+  <div class="linha3">principais sacerdotes</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">grammateis 1122</div>
+  <div class="linha2"><span data-id="γραμματεῖς">γραμματεῖς</span></div>
+  <div class="linha3">escribas</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">do</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">laou 2992</div>
+  <div class="linha2"><span data-id="λαοῦ">λαοῦ</span></div>
+  <div class="linha3">povo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">epynthaneto 4441</div>
+  <div class="linha2"><span data-id="ἐπυνθάνετο">ἐπυνθάνετο</span></div>
+  <div class="linha3">perguntou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">par’ 3844</div>
+  <div class="linha2"><span data-id="παρ’">παρ’</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autōn 846</div>
+  <div class="linha2"><span data-id="αὐτῶν">αὐτῶν</span></div>
+  <div class="linha3">eles</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pou 4226</div>
+  <div class="linha2"><span data-id="ποῦ">ποῦ</span></div>
+  <div class="linha3">onde</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ho 3588</div>
+  <div class="linha2"><span data-id="ὁ">ὁ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Christos 5547</div>
+  <div class="linha2"><span data-id="Χριστὸς">Χριστὸς</span></div>
+  <div class="linha3">Cristo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gennātai 1080</div>
+  <div class="linha2"><span data-id="γεννᾶται">γεννᾶται</span></div>
+  <div class="linha3">nasceria.</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:5 -->
+<div class="celula">
+  <div class="linha1">hoi 3588</div>
+  <div class="linha2"><span data-id="οἱ">5 οἱ</span></div>
+  <div class="linha3"><span class="numero" data-vers="5">5 </span> Eles,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">porém,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eipan 2036</div>
+  <div class="linha2"><span data-id="εἶπαν">εἶπαν</span></div>
+  <div class="linha3">disseram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autō 846</div>
+  <div class="linha2"><span data-id="αὐτῷ">αὐτῷ</span></div>
+  <div class="linha3">a ele:</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">En 1722</div>
+  <div class="linha2"><span data-id="Ἐν">Ἐν</span></div>
+  <div class="linha3">"Em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Bethleem 965</div>
+  <div class="linha2"><span data-id="Βηθλεὲμ">Βηθλεὲμ</span></div>
+  <div class="linha3">Belém</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēs 3588</div>
+  <div class="linha2"><span data-id="τῆς">τῆς</span></div>
+  <div class="linha3">da</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Ioudaias 2453</div>
+  <div class="linha2"><span data-id="Ἰουδαίας">Ἰουδαίας</span></div>
+  <div class="linha3">Judéia,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">houtōs 3779</div>
+  <div class="linha2"><span data-id="οὕτως">οὕτως</span></div>
+  <div class="linha3">[é] assim,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gar 1063</div>
+  <div class="linha2"><span data-id="γὰρ">γὰρ</span></div>
+  <div class="linha3">pois</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gegraptai 1125</div>
+  <div class="linha2"><span data-id="γέγραπται">γέγραπται</span></div>
+  <div class="linha3">foi escrito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">dia 1223</div>
+  <div class="linha2"><span data-id="διὰ">διὰ</span></div>
+  <div class="linha3">por meio</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">do</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">prophētou 4396</div>
+  <div class="linha2"><span data-id="προφήτου">προφήτου</span></div>
+  <div class="linha3">profeta:</div>
+</div>
+
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:6 -->
+<div class="celula">
+  <div class="linha1">Kai 2532</div>
+  <div class="linha2"><span data-id="Καὶ">6 Καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="6">6 </span> E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">sy 4771</div>
+  <div class="linha2"><span data-id="σὺ">σὺ</span></div>
+  <div class="linha3">tu</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Bethleem 965</div>
+  <div class="linha2"><span data-id="Βηθλεέμ">Βηθλεέμ</span></div>
+  <div class="linha3">Belém,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gē 1093</div>
+  <div class="linha2"><span data-id="γῆ">γῆ</span></div>
+  <div class="linha3">terra [de]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Iouda 2455</div>
+  <div class="linha2"><span data-id="Ἰούδα">Ἰούδα</span></div>
+  <div class="linha3">Judá,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">oudamōs 3764</div>
+  <div class="linha2"><span data-id="οὐδαμῶς">οὐδαμῶς</span></div>
+  <div class="linha3">jamais</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">elachistē 1646</div>
+  <div class="linha2"><span data-id="ἐλαχίστη">ἐλαχίστη</span></div>
+  <div class="linha3">a menor</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ei 1488</div>
+  <div class="linha2"><span data-id="εἶ">εἶ</span></div>
+  <div class="linha3">és</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">entre</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tois 3588</div>
+  <div class="linha2"><span data-id="τοῖς">τοῖς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hēgemosin 2232</div>
+  <div class="linha2"><span data-id="ἡγεμόσιν">ἡγεμόσιν</span></div>
+  <div class="linha3">líderes</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Iouda 2455</div>
+  <div class="linha2"><span data-id="Ἰούδα">Ἰούδα</span></div>
+  <div class="linha3">de Judá,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ek 1537</div>
+  <div class="linha2"><span data-id="ἐκ">ἐκ</span></div>
+  <div class="linha3">de</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">sou 4675</div>
+  <div class="linha2"><span data-id="σοῦ">σοῦ</span></div>
+  <div class="linha3">ti,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gar 1063</div>
+  <div class="linha2"><span data-id="γὰρ">γὰρ</span></div>
+  <div class="linha3">pois,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">exeleusetai 1831</div>
+  <div class="linha2"><span data-id="ἐξελεύσεται">ἐξελεύσεται</span></div>
+  <div class="linha3">sairá</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hēgoumenos 2233</div>
+  <div class="linha2"><span data-id="ἡγούμενος">ἡγούμενος</span></div>
+  <div class="linha3">[um] líder</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hostis 3748</div>
+  <div class="linha2"><span data-id="ὅστις">ὅστις</span></div>
+  <div class="linha3">que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">poimanei 4165</div>
+  <div class="linha2"><span data-id="ποιμανεῖ">ποιμανεῖ</span></div>
+  <div class="linha3">pastoreará</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">laon 2992</div>
+  <div class="linha2"><span data-id="λαόν">λαόν</span></div>
+  <div class="linha3">povo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mou 1473</div>
+  <div class="linha2"><span data-id="μου">μου</span></div>
+  <div class="linha3">meu,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Israēl 2474</div>
+  <div class="linha2"><span data-id="Ἰσραήλ">Ἰσραήλ</span></div>
+  <div class="linha3">Israel".</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:7 -->
+<div class="celula">
+  <div class="linha1">Tote 5119</div>
+  <div class="linha2"><span data-id="Τότε">7 Τότε</span></div>
+  <div class="linha3"><span class="numero" data-vers="7">7 </span>Então</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōidēs 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδης">Ἡρῴδης</span></div>
+  <div class="linha3">Herodes</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">lathra 2977</div>
+  <div class="linha2"><span data-id="λάθρᾳ">λάθρᾳ</span></div>
+  <div class="linha3">secretamente</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kalesas 2564</div>
+  <div class="linha2"><span data-id="καλέσας">καλέσας</span></div>
+  <div class="linha3">convocou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tous 3588</div>
+  <div class="linha2"><span data-id="τοὺς">τοὺς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">magous 3097</div>
+  <div class="linha2"><span data-id="μάγοι">μάγους</span></div>
+  <div class="linha3">magos;</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēkribōsen 198</div>
+  <div class="linha2"><span data-id="ἠκρίβωσεν">ἠκρίβωσεν</span></div>
+  <div class="linha3">averiguou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">par' 3844</div>
+  <div class="linha2"><span data-id="παρ’">παρ’</span></div>
+  <div class="linha3">de</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autōn 846</div>
+  <div class="linha2"><span data-id="αὐτῶν">αὐτῶν</span></div>
+  <div class="linha3">eles [deles]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">chronon 5550</div>
+  <div class="linha2"><span data-id="χρόνον">χρόνον</span></div>
+  <div class="linha3">tempo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">do</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">phainomenou 5316</div>
+  <div class="linha2"><span data-id="φαινομένου">φαινομένου</span></div>
+  <div class="linha3">aparecimento</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">asteros 792</div>
+  <div class="linha2"><span data-id="ἀστέρος">ἀστέρος</span></div>
+  <div class="linha3">[da] estrela.</div>
+</div>
+
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:8 -->
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">8 καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="8">8 </span>E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pempsas 3992</div>
+  <div class="linha2"><span data-id="πέμψας">πέμψας</span></div>
+  <div class="linha3">ao enviar</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autous 846</div>
+  <div class="linha2"><span data-id="αὐτοὺς">αὐτοὺς</span></div>
+  <div class="linha3">eles</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Bethleem 965</div>
+  <div class="linha2"><span data-id="Βηθλεὲμ">Βηθλεὲμ</span></div>
+  <div class="linha3">Belém</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eipen 2036</div>
+  <div class="linha2"><span data-id="εἶπεν">εἶπεν</span></div>
+  <div class="linha3">disse:</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Poreuthentes 4198</div>
+  <div class="linha2"><span data-id="Πορευθέντες">Πορευθέντες</span></div>
+  <div class="linha3">“Vão,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">exetasate 182</div>
+  <div class="linha2"><span data-id="ἐξετάσατε">ἐξετάσατε</span></div>
+  <div class="linha3">procurem</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">akrivōs 199</div>
+  <div class="linha2"><span data-id="ἀκριβῶς">ἀκριβῶς</span></div>
+  <div class="linha3">cuidadosamente</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">peri 4012</div>
+  <div class="linha2"><span data-id="περὶ">περὶ</span></div>
+  <div class="linha3">por</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">a [pela]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidiou 3813</div>
+  <div class="linha2"><span data-id="παιδίου">παιδίου</span></div>
+  <div class="linha3">criança.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">epan 1875</div>
+  <div class="linha2"><span data-id="ἐπὰν">ἐπὰν</span></div>
+  <div class="linha3">Quando,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">heurēte 2147</div>
+  <div class="linha2"><span data-id="εὕρητε">εὕρητε</span></div>
+  <div class="linha3">encontrarem,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">apangeilate 518</div>
+  <div class="linha2"><span data-id="ἀπαγγείλατέ">ἀπαγγείλατέ</span></div>
+  <div class="linha3">informem</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">moi 1473</div>
+  <div class="linha2"><span data-id="μοι">μοι</span></div>
+  <div class="linha3">a mim</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hopōs 3704</div>
+  <div class="linha2"><span data-id="ὅπως">ὅπως</span></div>
+  <div class="linha3">para que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kagō 2504</div>
+  <div class="linha2"><span data-id="κἀγὼ">κἀγὼ</span></div>
+  <div class="linha3">também</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">elthōn 2064</div>
+  <div class="linha2"><span data-id="ἐλθὼν">ἐλθὼν</span></div>
+  <div class="linha3">vá</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">proskynēsō 4352</div>
+  <div class="linha2"><span data-id="προσκυνήσω">προσκυνήσω</span></div>
+  <div class="linha3">homenagear</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autō 846</div>
+  <div class="linha2"><span data-id="αὐτῷ">αὐτῷ</span></div>
+  <div class="linha3">ela".</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:9 -->
+<div class="celula">
+  <div class="linha1">hoi 3588</div>
+  <div class="linha2"><span data-id="οἱ">9 οἱ</span></div>
+  <div class="linha3"><span class="numero" data-vers="9">9 </span>Eles,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">akousantes 191</div>
+  <div class="linha2"><span data-id="ἀκούσαντες">ἀκούσαντες</span></div>
+  <div class="linha3">escutaram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">basileōs 935</div>
+  <div class="linha2"><span data-id="βασιλέως">βασιλέως</span></div>
+  <div class="linha3">rei;</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eporeuthēsan 4198</div>
+  <div class="linha2"><span data-id="ἐπορεύθησαν">ἐπορεύθησαν</span></div>
+  <div class="linha3">partiram,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">idou 2400</div>
+  <div class="linha2"><span data-id="ἰδοὺ">ἰδοὺ</span></div>
+  <div class="linha3">vendo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ho 3588</div>
+  <div class="linha2"><span data-id="ὁ">ὁ</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">astēr 792</div>
+  <div class="linha2"><span data-id="ἀστὴρ">ἀστὴρ</span></div>
+  <div class="linha3">estrela</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hon 3739</div>
+  <div class="linha2"><span data-id="ὃν">ὃν</span></div>
+  <div class="linha3">que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eidon 3708</div>
+  <div class="linha2"><span data-id="εἶδον">εἶδον</span></div>
+  <div class="linha3">viram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tē 3588</div>
+  <div class="linha2"><span data-id="τῇ">τῇ</span></div>
+  <div class="linha3">o [no]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anatolē 395</div>
+  <div class="linha2"><span data-id="ἀνατολῇ">ἀνατολῇ</span></div>
+  <div class="linha3">oriente</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">proēgen 4254</div>
+  <div class="linha2"><span data-id="προῆγεν">προῆγεν</span></div>
+  <div class="linha3">adiante</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autous 846</div>
+  <div class="linha2"><span data-id="αὐτούς">αὐτούς</span></div>
+  <div class="linha3">deles</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">heōs 2193</div>
+  <div class="linha2"><span data-id="ἕως">ἕως</span></div>
+  <div class="linha3">até [que]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">elthōn 2064</div>
+  <div class="linha2"><span data-id="ἐλθὼν">ἐλθὼν</span></div>
+  <div class="linha3">chegando,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">estathē 2476</div>
+  <div class="linha2"><span data-id="ἐστάθη">ἐστάθη</span></div>
+  <div class="linha3">parou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">epanō 1883</div>
+  <div class="linha2"><span data-id="ἐπάνω">ἐπάνω</span></div>
+  <div class="linha3">sobre</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hou 3757</div>
+  <div class="linha2"><span data-id="οὗ">οὗ</span></div>
+  <div class="linha3">onde</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēn 1510</div>
+  <div class="linha2"><span data-id="ἦν">ἦν</span></div>
+  <div class="linha3">estava</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino.</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:10 -->
+<div class="celula">
+  <div class="linha1">idontes 1492</div>
+  <div class="linha2"><span data-id="ἰδόντες">10 ἰδόντες</span></div>
+  <div class="linha3"><span class="numero" data-vers="10">10 </span>Ao verem,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">astera 792</div>
+  <div class="linha2"><span data-id="ἀστέρα">ἀστέρα</span></div>
+  <div class="linha3">estrela</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">echarēsan 5463</div>
+  <div class="linha2"><span data-id="ἐχάρησαν">ἐχάρησαν</span></div>
+  <div class="linha3">alegraram-se</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">charan 5479</div>
+  <div class="linha2"><span data-id="χαρὰν">χαρὰν</span></div>
+  <div class="linha3">com alegria</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">megalēn 3173</div>
+  <div class="linha2"><span data-id="μεγάλην">μεγάλην</span></div>
+  <div class="linha3">grande</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">sphodra 4970</div>
+  <div class="linha2"><span data-id="σφόδρα">σφόδρα</span></div>
+  <div class="linha3">intensamente</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:11 -->
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">11 καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="11">11 </span>E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">elthontes 2064</div>
+  <div class="linha2"><span data-id="ἐλθόντες">ἐλθόντες</span></div>
+  <div class="linha3">chegando</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a [na]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">oikian 3614</div>
+  <div class="linha2"><span data-id="οἰκίαν">οἰκίαν</span></div>
+  <div class="linha3">casa,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eidon 3708</div>
+  <div class="linha2"><span data-id="εἶδον">εἶδον</span></div>
+  <div class="linha3">viram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">meta 3326</div>
+  <div class="linha2"><span data-id="μετὰ">μετὰ</span></div>
+  <div class="linha3">com</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Marias 3137</div>
+  <div class="linha2"><span data-id="Μαρίας">Μαρίας</span></div>
+  <div class="linha3">Maria,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēs 3588</div>
+  <div class="linha2"><span data-id="τῆς">τῆς</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mētros 3384</div>
+  <div class="linha2"><span data-id="μητρὸς">μητρὸς</span></div>
+  <div class="linha3">mãe</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pesontes 4098</div>
+  <div class="linha2"><span data-id="πεσόντες">πεσόντες</span></div>
+  <div class="linha3">curvararam-se</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">prosekynēsan 4352</div>
+  <div class="linha2"><span data-id="προσεκύνησαν">προσεκύνησαν</span></div>
+  <div class="linha3">[para] homenagear</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autō 846</div>
+  <div class="linha2"><span data-id="αὐτῷ">αὐτῷ</span></div>
+  <div class="linha3">a ele;</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anoixantes 455</div>
+  <div class="linha2"><span data-id="ἀνοίξαντες">ἀνοίξαντες</span></div>
+  <div class="linha3">abrindo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tous 3588</div>
+  <div class="linha2"><span data-id="τοὺς">τοὺς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">thēsaurous 2344</div>
+  <div class="linha2"><span data-id="θησαυρούς">θησαυρούς</span></div>
+  <div class="linha3">tesouros</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autōn 846</div>
+  <div class="linha2"><span data-id="αὐτῶν">αὐτῶν</span></div>
+  <div class="linha3">deles</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">prosēnegkan 4374</div>
+  <div class="linha2"><span data-id="προσήνεγκαν">προσήνεγκαν</span></div>
+  <div class="linha3">ofereceram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autō 846</div>
+  <div class="linha2"><span data-id="αὐτῷ">αὐτῷ</span></div>
+  <div class="linha3">a ele</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">dōra 1435</div>
+  <div class="linha2"><span data-id="δῶρα">δῶρα</span></div>
+  <div class="linha3">presentes [de]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">chryson 5557</div>
+  <div class="linha2"><span data-id="χρυσὸν">χρυσὸν</span></div>
+  <div class="linha3">ouro</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">libanon 3030</div>
+  <div class="linha2"><span data-id="λίβανον">λίβανον</span></div>
+  <div class="linha3">incenso</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">smyrnan 4666</div>
+  <div class="linha2"><span data-id="σμύρναν">σμύρναν</span></div>
+  <div class="linha3">mirra.</div>
+</div>
+
+
+<!-- =================================== MATEUS 2:12 -->
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">12 καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="12">12</span>Mas</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">chrēmatisthentes 5537</div>
+  <div class="linha2"><span data-id="χρηματισθέντες">χρηματισθέντες</span></div>
+  <div class="linha3">por aviso divino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kat’ 2596</div>
+  <div class="linha2"><span data-id="κατ’">κατ’</span></div>
+  <div class="linha3">durante</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">onar 3677</div>
+  <div class="linha2"><span data-id="ὄναρ">ὄναρ</span></div>
+  <div class="linha3">um sonho</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mē 3361</div>
+  <div class="linha2"><span data-id="μὴ">μὴ</span></div>
+  <div class="linha3">não</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anakampsai 344</div>
+  <div class="linha2"><span data-id="ἀνακάμψαι">ἀνακάμψαι</span></div>
+  <div class="linha3">retornaram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pros 4314</div>
+  <div class="linha2"><span data-id="πρὸς">πρὸς</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōdēn 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδην">Ἡρῴδην</span></div>
+  <div class="linha3">Herodes;</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">di’ 1223</div>
+  <div class="linha2"><span data-id="δι’">δι’</span></div>
+  <div class="linha3">por</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">allēs 243</div>
+  <div class="linha2"><span data-id="ἄλλης">ἄλλης</span></div>
+  <div class="linha3">outra</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hodou 3598</div>
+  <div class="linha2"><span data-id="ὁδοῦ">ὁδοῦ</span></div>
+  <div class="linha3">estrada</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anechōrēsan 402</div>
+  <div class="linha2"><span data-id="ἀνεχώρησαν">ἀνεχώρησαν</span></div>
+  <div class="linha3">retiraram-se</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">chōran 5561</div>
+  <div class="linha2"><span data-id="χώραν">χώραν</span></div>
+  <div class="linha3">terra</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autōn 846</div>
+  <div class="linha2"><span data-id="αὐτῶν">αὐτῶν</span></div>
+  <div class="linha3">deles.</div>
+</div>
+
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:13 -->
+<div class="celula">
+  <div class="linha1">Anachōrēsantōn 4383</div>
+  <div class="linha2"><span data-id="Ἀναχωρησάντων">13 Ἀναχωρησάντων</span></div>
+  <div class="linha3"><span class="numero" data-vers="13">13</span>Após partirem,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autōn 846</div>
+  <div class="linha2"><span data-id="αὐτῶν">αὐτῶν</span></div>
+  <div class="linha3">eles,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">idou 2400</div>
+  <div class="linha2"><span data-id="ἰδοὺ">ἰδοὺ</span></div>
+  <div class="linha3">de repente</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">aggelos 32</div>
+  <div class="linha2"><span data-id="ἄγγελος">ἄγγελος</span></div>
+  <div class="linha3">[um] anjo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Kyriou 2962</div>
+  <div class="linha2"><span data-id="Κυρίου">Κυρίου<span class="tooltip">
+  <span class="tooltip-icon" onclick="toggleTooltip(this)">*</span>
+  <span class="tooltiptext">
+    [יְהוָה] Jeová<br><br>
+	No Novo Testamento em Hebraico, produzido e distribuido pela THE SOCIETY FOR DISTRIBUTING HEBREW SCRIPTURES (A SOCIEDADE PARA DISTRIBUIÇÃO DAS ESCRITURAS HEBRAICAS), na segunda linha da página 3 (impressa) (9, digital) encontramos em <a href="https://www.sdhs.co.uk/wp-content/uploads/scriptorium/he_newTestament-A4.pdf" target="_blank"> Mateus 2:13
+	   </a>
+	   o nome divino em hebraico (יְהוָה) que é amplamente conhecido em português como Jeová.
+  </span>
+</span></span></span></div></span>
+  <div class="linha3">[do] Senhor [Jeová]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">phaínetai 5316</div>
+  <div class="linha2"><span data-id="φαίνεται">φαίνεται</span></div>
+  <div class="linha3">apareceu</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kat' 2596</div>
+  <div class="linha2"><span data-id="κατ’">κατ’</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ónar 3677</div>
+  <div class="linha2"><span data-id="ὄναρ">ὄναρ</span></div>
+  <div class="linha3">sonho</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tō 3588</div>
+  <div class="linha2"><span data-id="τῷ">τῷ</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Iōsēph 2501</div>
+  <div class="linha2"><span data-id="Ἰωσὴφ">Ἰωσὴφ</span></div>
+  <div class="linha3">José</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">legōn 3004</div>
+  <div class="linha2"><span data-id="λέγων">λέγων</span></div>
+  <div class="linha3">dizendo:</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Egertheis 1453</div>
+  <div class="linha2"><span data-id="Ἐγερθεὶς">Ἐγερθεὶς</span></div>
+  <div class="linha3">"Levante-se</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paralabe 3880</div>
+  <div class="linha2"><span data-id="παράλαβε">παράλαβε</span></div>
+  <div class="linha3">pegue</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mētera 3384</div>
+  <div class="linha2"><span data-id="μητέρα">μητέρα</span></div>
+  <div class="linha3">mãe</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pheuge 5342</div>
+  <div class="linha2"><span data-id="φεῦγε">φεῦγε</span></div>
+  <div class="linha3">fujam</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Aigypton 114</div>
+  <div class="linha2"><span data-id="Αἴγυπτον">Αἴγυπτον</span></div>
+  <div class="linha3">o Egito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">isthi 1492</div>
+  <div class="linha2"><span data-id="ἴσθι">ἴσθι</span></div>
+  <div class="linha3">fiquem</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ekei 1563</div>
+  <div class="linha2"><span data-id="ἐκεῖ">ἐκεῖ</span></div>
+  <div class="linha3">lá</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">heōs 2193</div>
+  <div class="linha2"><span data-id="ἕως">ἕως</span></div>
+  <div class="linha3">até</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">an 3306</div>
+  <div class="linha2"><span data-id="ἂν">ἂν</span></div>
+  <div class="linha3">que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eipō 2036</div>
+  <div class="linha2"><span data-id="εἴπω">εἴπω</span></div>
+  <div class="linha3">eu diga</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">soi 5209</div>
+  <div class="linha2"><span data-id="σοι">σοι</span></div>
+  <div class="linha3">a ti.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mellei 3195</div>
+  <div class="linha2"><span data-id="μέλλει">μέλλει</span></div>
+  <div class="linha3">Está chegando,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gar 1063</div>
+  <div class="linha2"><span data-id="γὰρ">γὰρ</span></div>
+  <div class="linha3">pois,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōdēs 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδης">Ἡρῴδης</span></div>
+  <div class="linha3">Herodes,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">zētein 2212</div>
+  <div class="linha2"><span data-id="ζητεῖν">ζητεῖν</span></div>
+  <div class="linha3">procurando</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">apolesai 684</div>
+  <div class="linha2"><span data-id="ἀπολέσαι">ἀπολέσαι</span></div>
+  <div class="linha3">matar</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">auto 846</div>
+  <div class="linha2"><span data-id="αὐτό">αὐτό</span></div>
+  <div class="linha3">ele".</div>
+</div>
+
+
+<!-- =================================== MATEUS 2:14 -->
+<div class="celula">
+  <div class="linha1">ho 3588</div>
+  <div class="linha2"><span data-id="ὁ">14 ὁ</span></div>
+  <div class="linha3"><span class="numero" data-vers="14">14</span> Ele,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">egertheis 1453</div>
+  <div class="linha2"><span data-id="ἐγερθεὶς">ἐγερθεὶς</span></div>
+  <div class="linha3">levantou-se,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">parelaben 3880</div>
+  <div class="linha2"><span data-id="παρέλαβεν">παρέλαβεν</span></div>
+  <div class="linha3">pegou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mētera 3384</div>
+  <div class="linha2"><span data-id="μητέρα">μητέρα</span></div>
+  <div class="linha3">mãe</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">nuktos 3571</div>
+  <div class="linha2"><span data-id="νυκτός">νυκτός</span></div>
+  <div class="linha3">[de] noite</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anēlthen 424</div>
+  <div class="linha2"><span data-id="ἀνῆλθεν">ἀνῆλθεν</span></div>
+  <div class="linha3">partiram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Aigypton 114</div>
+  <div class="linha2"><span data-id="Αἴγυπτον">Αἴγυπτον</span></div>
+  <div class="linha3">o Egito.</div>
+</div>
+
+
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:15 -->
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">15 καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="15">15 </span>E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēn 1510</div>
+  <div class="linha2"><span data-id="ἦν">ἦν</span></div>
+  <div class="linha3">ficaram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ekei 1563</div>
+  <div class="linha2"><span data-id="ἐκεῖ">ἐκεῖ</span></div>
+  <div class="linha3">lá</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">heōs 2193</div>
+  <div class="linha2"><span data-id="ἕως">ἕως</span></div>
+  <div class="linha3">até</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēs 3588</div>
+  <div class="linha2"><span data-id="τῆς">τῆς</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">teleutēs 5054</div>
+  <div class="linha2"><span data-id="τελευτῆς">τελευτῆς</span></div>
+  <div class="linha3">morte [de]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōidou 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδου">Ἡρῴδου</span></div>
+  <div class="linha3">Herodes,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hina 2443</div>
+  <div class="linha2"><span data-id="ἵνα">ἵνα</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">plērōthē 4137</div>
+  <div class="linha2"><span data-id="πληρωθῇ">πληρωθῇ</span></div>
+  <div class="linha3">cumprir</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">rhēthen 4483</div>
+  <div class="linha2"><span data-id="ῥηθὲν">ῥηθὲν</span></div>
+  <div class="linha3">dito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hypo 5259</div>
+  <div class="linha2"><span data-id="ὑπὸ">ὑπὸ</span></div>
+  <div class="linha3">por</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Kyriou 2962</div>
+  <div class="linha2"><span data-id="Κυρίου">Κυρίου<span class="tooltip">
+  <span class="tooltip-icon" onclick="toggleTooltip(this)">*</span>
+  <span class="tooltiptext">
+    [יְהוָה] Jeová<br><br>
+	No Novo Testamento em Hebraico, produzido e distribuido pela THE SOCIETY FOR DISTRIBUTING HEBREW SCRIPTURES (A SOCIEDADE PARA DISTRIBUIÇÃO DAS ESCRITURAS HEBRAICAS), na sexta linha da página 3 (impressa) (9, digital) encontramos em <a href="https://www.sdhs.co.uk/wp-content/uploads/scriptorium/he_newTestament-A4.pdf" target="_blank"> Mateus 2:15
+	   </a>
+	   o nome divino em hebraico (יְהוָה) que é amplamente conhecido em português como Jeová.
+  </span>
+</span></span></span></div></span></span>
+  <div class="linha3">[o] Senhor [Jeová]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">dia 1223</div>
+  <div class="linha2"><span data-id="διὰ">διὰ</span></div>
+  <div class="linha3">por meio</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">do</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">prophētou 4396</div>
+  <div class="linha2"><span data-id="προφήτου">προφήτου</span></div>
+  <div class="linha3">profeta</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">legontos 3004</div>
+  <div class="linha2"><span data-id="λέγοντος">λέγοντος</span></div>
+  <div class="linha3">dizendo:</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Ex 1537</div>
+  <div class="linha2"><span data-id="Ἐξ">Ἐξ</span></div>
+  <div class="linha3">"Do</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Aigyptou 125</div>
+  <div class="linha2"><span data-id="Αἰγύπτου">Αἰγύπτου</span></div>
+  <div class="linha3">Egito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ekalesa 2564</div>
+  <div class="linha2"><span data-id="ἐκάλεσα">ἐκάλεσα</span></div>
+  <div class="linha3">chamei</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">huion 5207</div>
+  <div class="linha2"><span data-id="υἱόν">υἱόν</span></div>
+  <div class="linha3">filho</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mou 1473</div>
+  <div class="linha2"><span data-id="μου">μου</span></div>
+  <div class="linha3">meu".</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:16 -->
+
+<div class="celula">
+  <div class="linha1">Tote 5119</div>
+  <div class="linha2"><span data-id="Τότε">16 Τότε</span></div>
+  <div class="linha3"><span class="numero" data-vers="16">16 </span>Então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōidēs 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδης">Ἡρῴδης</span></div>
+  <div class="linha3">Herodes</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">idōn 1492</div>
+  <div class="linha2"><span data-id="ἰδὼν">ἰδὼν</span></div>
+  <div class="linha3">vendo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hoti 3754</div>
+  <div class="linha2"><span data-id="ὅτι">ὅτι</span></div>
+  <div class="linha3">que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">enepaichthē 1702</div>
+  <div class="linha2"><span data-id="ἐνεπαίχθη">ἐνεπαίχθη</span></div>
+  <div class="linha3">foi enganado</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hypo 5259</div>
+  <div class="linha2"><span data-id="ὑπὸ">ὑπὸ</span></div>
+  <div class="linha3">por</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tōn 3588</div>
+  <div class="linha2"><span data-id="τῶν">τῶν</span></div>
+  <div class="linha3">os [pelos]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">magōn 3097</div>
+  <div class="linha2"><span data-id="μάγοι">μάγων</span></div>
+  <div class="linha3">magos,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ethymōthē 2373</div>
+  <div class="linha2"><span data-id="ἐθυμώθη">ἐθυμώθη</span></div>
+  <div class="linha3">ficou furioso</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">lian 3029</div>
+  <div class="linha2"><span data-id="λίαν,">λίαν,</span></div>
+  <div class="linha3">muito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">aposteilas 649</div>
+  <div class="linha2"><span data-id="ἀποστείλας">ἀποστείλας</span></div>
+  <div class="linha3">ordenou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">aneilen 337</div>
+  <div class="linha2"><span data-id="ἀνεῖλεν">ἀνεῖλεν</span></div>
+  <div class="linha3">matar</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pantas 3956</div>
+  <div class="linha2"><span data-id="πάντας">πάντας</span></div>
+  <div class="linha3">todos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tous 3588</div>
+  <div class="linha2"><span data-id="τοὺς">τοὺς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidas 3816</div>
+  <div class="linha2"><span data-id="παῖδας">παῖδας</span></div>
+  <div class="linha3">meninos,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tous 3588</div>
+  <div class="linha2"><span data-id="τοὺς">τοὺς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Bethleem 965</div>
+  <div class="linha2"><span data-id="Βηθλεὲμ">Βηθλεὲμ</span></div>
+  <div class="linha3">Belém</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">pasi 3956</div>
+  <div class="linha2"><span data-id="πᾶσι">πᾶσι</span></div>
+  <div class="linha3">todos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tois 3588</div>
+  <div class="linha2"><span data-id="τοῖς">τοῖς</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">horois 3725</div>
+  <div class="linha2"><span data-id="ὁρίοις">ὁρίοις</span></div>
+  <div class="linha3">limites</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autēs 846</div>
+  <div class="linha2"><span data-id="αὐτῆς">αὐτῆς</span></div>
+  <div class="linha3">dela</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">apo 575</div>
+  <div class="linha2"><span data-id="ἀπὸ">ἀπὸ</span></div>
+  <div class="linha3">desde</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">dietous 1332</div>
+  <div class="linha2"><span data-id="διετοῦς">διετοῦς</span></div>
+  <div class="linha3">dois anos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">katōterō 2736</div>
+  <div class="linha2"><span data-id="κατωτέρω,">κατωτέρω,</span></div>
+  <div class="linha3">abaixo,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kata 2596</div>
+  <div class="linha2"><span data-id="κατὰ">κατὰ</span></div>
+  <div class="linha3">segundo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ton 3588</div>
+  <div class="linha2"><span data-id="τὸν">τὸν</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">chronon 5550</div>
+  <div class="linha2"><span data-id="χρόνον">χρόνον</span></div>
+  <div class="linha3">tempo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hon 3739</div>
+  <div class="linha2"><span data-id="ὃν">ὃν</span></div>
+  <div class="linha3">que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēkribōsen 1988</div>
+  <div class="linha2"><span data-id="ἠκρίβωσεν">ἠκρίβωσεν</span></div>
+  <div class="linha3">verificou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">para 3844</div>
+  <div class="linha2"><span data-id="παρὰ">παρὰ</span></div>
+  <div class="linha3">com</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tōn 3588</div>
+  <div class="linha2"><span data-id="τῶν">τῶν</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">magōn 3097</div>
+  <div class="linha2"><span data-id="μάγοι">μάγων.</span></div>
+  <div class="linha3">magos.</div>
+</div>
+
+
+
+<!-- =================================== MATEUS 2:17 -->
+
+<div class="celula">
+  <div class="linha1">tote 5119</div>
+  <div class="linha2"><span data-id="τότε">17 τότε</span></div>
+  <div class="linha3"><span class="numero" data-vers="17">17 </span>Assim</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eplērōthē 4137</div>
+  <div class="linha2"><span data-id="ἐπληρώθη">ἐπληρώθη</span></div>
+  <div class="linha3">cumpriu-se</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">rhēthen 4483</div>
+  <div class="linha2"><span data-id="ῥηθὲν">ῥηθὲν</span></div>
+  <div class="linha3">dito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">dia 1223</div>
+  <div class="linha2"><span data-id="διὰ">διὰ</span></div>
+  <div class="linha3">por meio de</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Ieremiou 2408</div>
+  <div class="linha2"><span data-id="Ἰερεμίου">Ἰερεμίου</span></div>
+  <div class="linha3">Jeremias,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">prophētou 4396</div>
+  <div class="linha2"><span data-id="προφήτου">προφήτου</span></div>
+  <div class="linha3">profeta,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">legontos 3004</div>
+  <div class="linha2"><span data-id="λέγοντος">λέγοντος</span></div>
+  <div class="linha3">dizendo:</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:18 -->
+
+<div class="celula">
+  <div class="linha1">Phōnē 5456</div>
+  <div class="linha2"><span data-id="Φωνὴ">18 Φωνὴ</span></div>
+  <div class="linha3"><span class="numero" data-vers="18">18 </span>"Vozes</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Rama 4471</div>
+  <div class="linha2"><span data-id="Ῥαμὰ">Ῥαμὰ</span></div>
+  <div class="linha3">Ramá</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēkousthē 191</div>
+  <div class="linha2"><span data-id="ἠκούσθη,">ἠκούσθη,</span></div>
+  <div class="linha3">foram ouvidas,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">klauthmos 2805</div>
+  <div class="linha2"><span data-id="κλαυθμὸς">κλαυθμὸς</span></div>
+  <div class="linha3">lamento</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">odyrmos 3602</div>
+  <div class="linha2"><span data-id="ὀδυρμὸς">ὀδυρμὸς</span></div>
+  <div class="linha3">choro,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">polys 4183</div>
+  <div class="linha2"><span data-id="πολύς·">πολύς·</span></div>
+  <div class="linha3">muito.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Rachēl 4478</div>
+  <div class="linha2"><span data-id="Ῥαχὴλ">Ῥαχὴλ</span></div>
+  <div class="linha3">Raquel</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">klaiousa 2799</div>
+  <div class="linha2"><span data-id="κλαίουσα">κλαίουσα</span></div>
+  <div class="linha3">chorando</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ta 3588</div>
+  <div class="linha2"><span data-id="τὰ">τὰ</span></div>
+  <div class="linha3">pelos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tekna 5043</div>
+  <div class="linha2"><span data-id="τέκνα">τέκνα</span></div>
+  <div class="linha3">filhos</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autēs 846</div>
+  <div class="linha2"><span data-id="αὐτῆς,">αὐτῆς,</span></div>
+  <div class="linha3">dela.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ouk 3756</div>
+  <div class="linha2"><span data-id="οὐκ">οὐκ</span></div>
+  <div class="linha3">não</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ēthelen 2309</div>
+  <div class="linha2"><span data-id="ἤθελεν">ἤθελεν</span></div>
+  <div class="linha3">quis</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paraklēthēnai 3870</div>
+  <div class="linha2"><span data-id="παρακληθῆναι">παρακληθῆναι</span></div>
+  <div class="linha3">ser consolada</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hoti 3754</div>
+  <div class="linha2"><span data-id="ὅτι">ὅτι</span></div>
+  <div class="linha3">porque</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ouk 3756</div>
+  <div class="linha2"><span data-id="οὐκ">οὐκ</span></div>
+  <div class="linha3">não [mais]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eisin 1510</div>
+  <div class="linha2"><span data-id="εἰσίν.">εἰσίν.</span></div>
+  <div class="linha3">existem".</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:19 -->
+
+<div class="celula">
+  <div class="linha1">Teleutēsantos 5053</div>
+  <div class="linha2"><span data-id="Τελευτήσαντος">19 Τελευτήσαντος</span></div>
+  <div class="linha3"><span class="numero" data-vers="19">19 </span>Após a morte,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">de</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōidou 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδου,">Ἡρῴδου,</span></div>
+  <div class="linha3">Herodes,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">idou 2400</div>
+  <div class="linha2"><span data-id="ἰδοὺ">ἰδοὺ</span></div>
+  <div class="linha3">de repente</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">angelos 32</div>
+  <div class="linha2"><span data-id="ἄγγελος">ἄγγελος</span></div>
+  <div class="linha3">[o] anjo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Kyriou 2962</div>
+  <div class="linha2"><span data-id="Κυρίου">Κυρίου<span class="tooltip">
+  <span class="tooltip-icon" onclick="toggleTooltip(this)">*</span>
+  <span class="tooltiptext">
+    [יְהוָה] Jeová<br><br>
+	No Novo Testamento em Hebraico, produzido e distribuido pela THE SOCIETY FOR DISTRIBUTING HEBREW SCRIPTURES (A SOCIEDADE PARA DISTRIBUIÇÃO DAS ESCRITURAS HEBRAICAS), na décima quarta linha da página 3 (impressa) (9, digital) encontramos em <a href="https://www.sdhs.co.uk/wp-content/uploads/scriptorium/he_newTestament-A4.pdf" target="_blank"> Mateus 2:19
+	   </a>
+	   o nome divino em hebraico (יְהוָה) que é amplamente conhecido em português como Jeová.
+  </span>
+</span></span></span></div></span></span>
+  <div class="linha3">[do] Senhor {Jeová]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">phainetai 5316</div>
+  <div class="linha2"><span data-id="φαίνεται">φαίνεται</span></div>
+  <div class="linha3">apareceu</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kat' 2596</div>
+  <div class="linha2"><span data-id="κατ’">κατ’</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">onar 3677</div>
+  <div class="linha2"><span data-id="ὄναρ">ὄναρ</span></div>
+  <div class="linha3">sonho</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tō 3588</div>
+  <div class="linha2"><span data-id="τῷ">τῷ</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Iōsēph 2501</div>
+  <div class="linha2"><span data-id="Ἰωσὴφ">Ἰωσὴφ</span></div>
+  <div class="linha3">José</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">en 1722</div>
+  <div class="linha2"><span data-id="ἐν">ἐν</span></div>
+  <div class="linha3">no</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Aigyptō 125</div>
+  <div class="linha2"><span data-id="Αἰγύπτῳ">Αἰγύπτῳ</span></div>
+  <div class="linha3">Egito,</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:20 -->
+
+<div class="celula">
+  <div class="linha1">legōn 3004</div>
+  <div class="linha2"><span data-id="λέγων">20 λέγων</span></div>
+  <div class="linha3"><span class="numero" data-vers="20">20 </span>dizendo</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Egerthēs 1453</div>
+  <div class="linha2"><span data-id="Ἐγερθεὶς">Ἐγερθεὶς</span></div>
+  <div class="linha3">"Levante-se,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paralabe 3880</div>
+  <div class="linha2"><span data-id="παράλαβε">παράλαβε</span></div>
+  <div class="linha3">pegue</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mētera 3384</div>
+  <div class="linha2"><span data-id="μητέρα">μητέρα</span></div>
+  <div class="linha3">mãe</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">poreuou 4198</div>
+  <div class="linha2"><span data-id="πορεύου">πορεύου</span></div>
+  <div class="linha3">vão</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">para [a]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gēn 1093</div>
+  <div class="linha2"><span data-id="γῆν">γῆν</span></div>
+  <div class="linha3">terra [de]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Israēl 2474</div>
+  <div class="linha2"><span data-id="Ἰσραήλ·">Ἰσραήλ·</span></div>
+  <div class="linha3">Israel.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tethnēkasin 2348</div>
+  <div class="linha2"><span data-id="τεθνήκασιν">τεθνήκασιν</span></div>
+  <div class="linha3">Morreram,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gar 1063</div>
+  <div class="linha2"><span data-id="γὰρ">γὰρ</span></div>
+  <div class="linha3">pois,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hoi 3588</div>
+  <div class="linha2"><span data-id="οἱ">οἱ</span></div>
+  <div class="linha3">os</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">zētountes 2212</div>
+  <div class="linha2"><span data-id="ζητοῦντες">ζητοῦντες</span></div>
+  <div class="linha3">[que] desejavam</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">psychēn 5590</div>
+  <div class="linha2"><span data-id="ψυχὴν">ψυχὴν</span></div>
+  <div class="linha3">vida</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">do</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidiou 3813</div>
+  <div class="linha2"><span data-id="παιδίου.">παιδίου.</span></div>
+  <div class="linha3">menino".</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:21 -->
+
+<div class="celula">
+  <div class="linha1">ho 3588</div>
+  <div class="linha2"><span data-id="ὁ">21 ὁ</span></div>
+  <div class="linha3"><span class="numero" data-vers="21">21 </span>Ele,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">egerheis 1453</div>
+  <div class="linha2"><span data-id="ἐγερθεὶς">ἐγερθεὶς</span></div>
+  <div class="linha3">levantou-se,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">parelaben 3880</div>
+  <div class="linha2"><span data-id="παρέλαβεν">παρέλαβεν</span></div>
+  <div class="linha3">pegou</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">paidion 3813</div>
+  <div class="linha2"><span data-id="παιδίον">παιδίον</span></div>
+  <div class="linha3">menino</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēn 3588</div>
+  <div class="linha2"><span data-id="τὴν">τὴν</span></div>
+  <div class="linha3">a</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">mētera 3384</div>
+  <div class="linha2"><span data-id="μητέρα">μητέρα</span></div>
+  <div class="linha3">mãe</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3">e</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eisēlthen 1525</div>
+  <div class="linha2"><span data-id="εἰσῆλθεν">εἰσῆλθεν</span></div>
+  <div class="linha3">entraram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">na</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">gēn 1093</div>
+  <div class="linha2"><span data-id="γῆν">γῆν</span></div>
+  <div class="linha3">terra [de]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Israēl 2474</div>
+  <div class="linha2"><span data-id="Ἰσραήλ.">Ἰσραήλ.</span></div>
+  <div class="linha3">Israel.</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:22 -->
+
+<div class="celula">
+  <div class="linha1">akousas 191</div>
+  <div class="linha2"><span data-id="ἀκούσας">22 ἀκούσας</span></div>
+  <div class="linha3"><span class="numero" data-vers="22">22 </span>Ouvindo,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hoti 3754</div>
+  <div class="linha2"><span data-id="ὅτι">ὅτι</span></div>
+  <div class="linha3">que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Archelaos 745</div>
+  <div class="linha2"><span data-id="Ἀρχέλαος">Ἀρχέλαος</span></div>
+  <div class="linha3">Arquelau</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">basileuei 936</div>
+  <div class="linha2"><span data-id="βασιλεύει">βασιλεύει</span></div>
+  <div class="linha3">reinava</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēs 3588</div>
+  <div class="linha2"><span data-id="τῆς">τῆς</span></div>
+  <div class="linha3">na</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Ioudaias 2453</div>
+  <div class="linha2"><span data-id="Ἰουδαίας">Ἰουδαίας</span></div>
+  <div class="linha3">Judéia</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anti 473</div>
+  <div class="linha2"><span data-id="ἀντὶ">ἀντὶ</span></div>
+  <div class="linha3">no lugar de</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tou 3588</div>
+  <div class="linha2"><span data-id="τοῦ">τοῦ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">patros 3962</div>
+  <div class="linha2"><span data-id="πατρὸς">πατρὸς</span></div>
+  <div class="linha3">pai</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">autou 846</div>
+  <div class="linha2"><span data-id="αὐτοῦ">αὐτοῦ</span></div>
+  <div class="linha3">dele,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Hērōidou 2264</div>
+  <div class="linha2"><span data-id="Ἡρῴδου">Ἡρῴδου</span></div>
+  <div class="linha3">Herodes,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ephobēthē 5399</div>
+  <div class="linha2"><span data-id="ἐφοβήθη">ἐφοβήθη</span></div>
+  <div class="linha3">temeu</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ekei 1563</div>
+  <div class="linha2"><span data-id="ἐκεῖ">ἐκεῖ</span></div>
+  <div class="linha3">ali</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">apelthein 565</div>
+  <div class="linha2"><span data-id="ἀπελθεῖν·">ἀπελθεῖν·</span></div>
+  <div class="linha3">ficar.</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">chrēmatistheis 5537</div>
+  <div class="linha2"><span data-id="χρηματισθεὶς">χρηματισθεὶς</span></div>
+  <div class="linha3">Avisado,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">de 1161</div>
+  <div class="linha2"><span data-id="δὲ">δὲ</span></div>
+  <div class="linha3">então,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">kat' 2596</div>
+  <div class="linha2"><span data-id="κατ’">κατ’</span></div>
+  <div class="linha3">em</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">onar 3677</div>
+  <div class="linha2"><span data-id="ὄναρ">ὄναρ</span></div>
+  <div class="linha3">sonho,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">anechōrēsen 402</div>
+  <div class="linha2"><span data-id="ἀνεχώρησεν">ἀνεχώρησεν</span></div>
+  <div class="linha3">foram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">para</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">ta 3588</div>
+  <div class="linha2"><span data-id="τὰ">τὰ</span></div>
+  <div class="linha3">as</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">merē 3313</div>
+  <div class="linha2"><span data-id="μέρη">μέρη</span></div>
+  <div class="linha3">regiões</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tēs 3588</div>
+  <div class="linha2"><span data-id="τῆς">τῆς</span></div>
+  <div class="linha3">da</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Galilaias 1056</div>
+  <div class="linha2"><span data-id="Γαλιλαίας,">Γαλιλαίας,</span></div>
+  <div class="linha3">Galileia.</div>
+</div>
+<div class="celula paragrafo">
+
+
+<!-- =================================== MATEUS 2:23 -->
+
+<div class="celula">
+  <div class="linha1">kai 2532</div>
+  <div class="linha2"><span data-id="καὶ">καὶ</span></div>
+  <div class="linha3"><span class="numero" data-vers="23">23 </span>E</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">elthōn 2064</div>
+  <div class="linha2"><span data-id="ἐλθὼν">ἐλθὼν</span></div>
+  <div class="linha3">foram</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">katōikēsen 2730</div>
+  <div class="linha2"><span data-id="κατῴκησεν">κατῴκησεν</span></div>
+  <div class="linha3">morar</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">eis 1519</div>
+  <div class="linha2"><span data-id="εἰς">εἰς</span></div>
+  <div class="linha3">na</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">polin 4172</div>
+  <div class="linha2"><span data-id="πόλιν">πόλιν</span></div>
+  <div class="linha3">cidade</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">legomenēn 3004</div>
+  <div class="linha2"><span data-id="λεγομένην">λεγομένην</span></div>
+  <div class="linha3">chamada</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Nazaret 3478</div>
+  <div class="linha2"><span data-id="Ναζαρέτ·">Ναζαρέτ·</span></div>
+  <div class="linha3">Nazaré,</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hopōs 3704</div>
+  <div class="linha2"><span data-id="ὅπως">ὅπως</span></div>
+  <div class="linha3">para que</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">plērōthē 4137</div>
+  <div class="linha2"><span data-id="πληρωθῇ">πληρωθῇ</span></div>
+  <div class="linha3">se cumprisse</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">to 3588</div>
+  <div class="linha2"><span data-id="τὸ">τὸ</span></div>
+  <div class="linha3">o</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">rhēthen 2046</div>
+  <div class="linha2"><span data-id="ῥηθὲν">ῥηθὲν</span></div>
+  <div class="linha3">dito</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">dia 1223</div>
+  <div class="linha2"><span data-id="διὰ">διὰ</span></div>
+  <div class="linha3">por</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">tōn 3588</div>
+  <div class="linha2"><span data-id="τῶν">τῶν</span></div>
+  <div class="linha3">os [pelos]</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">prophētōn 4396</div>
+  <div class="linha2"><span data-id="προφητῶν">προφητῶν</span></div>
+  <div class="linha3">profetas</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">hoti 3754</div>
+  <div class="linha2"><span data-id="ὅτι">ὅτι</span></div>
+  <div class="linha3">que:</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">Nazōraios 3480</div>
+  <div class="linha2"><span data-id="Ναζωραῖος">Ναζωραῖος</span></div>
+  <div class="linha3">"Nazareno</div>
+</div>
+
+<div class="celula">
+  <div class="linha1">klēthēsetai 2564</div>
+  <div class="linha2"><span data-id="κληθήσεται.">κληθήσεται.</span></div>
+  <div class="linha3">será chamado".</div>
+
+
+	
+<!-------------------------------Final do código dos versiculos -->
+
+
+<button id="botao-topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ ⬆</button>
+
+<script>
+// Objeto livros (mesmo do seu código)
+const livros = {
+  "Mateus":            { num: "01", id: "mateus",            caps: 28 },
+  "Marcos":            { num: "02", id: "marcos",            caps: 16 },
+  "Lucas":             { num: "03", id: "lucas",             caps: 24 },
+  "João":              { num: "04", id: "joao",              caps: 21 },
+  "Atos":              { num: "05", id: "atos",              caps: 28 },
+  "Romanos":           { num: "06", id: "romanos",           caps: 16 },
+  "1 Coríntios":       { num: "07", id: "1corintios",        caps: 16 },
+  "2 Coríntios":       { num: "08", id: "2corintios",        caps: 13 },
+  "Gálatas":           { num: "09", id: "galatas",           caps: 6  },
+  "Efésios":           { num: "10", id: "efesios",           caps: 6  },
+  "Filipenses":        { num: "11", id: "filipenses",        caps: 4  },
+  "Colossenses":       { num: "12", id: "colossenses",       caps: 4  },
+  "1 Tessalonicenses": { num: "13", id: "1tessalonicenses",  caps: 5  },
+  "2 Tessalonicenses": { num: "14", id: "2tessalonicenses",  caps: 3  },
+  "1 Timóteo":         { num: "15", id: "1timoteo",          caps: 6  },
+  "2 Timóteo":         { num: "16", id: "2timoteo",          caps: 4  },
+  "Tito":              { num: "17", id: "tito",              caps: 3  },
+  "Filemom":           { num: "18", id: "filemom",           caps: 1  },
+  "Hebreus":           { num: "19", id: "hebreus",           caps: 13 },
+  "Tiago":             { num: "20", id: "tiago",             caps: 5  },
+  "1 Pedro":           { num: "21", id: "1pedro",            caps: 5  },
+  "2 Pedro":           { num: "22", id: "2pedro",            caps: 3  },
+  "1 João":            { num: "23", id: "1joao",             caps: 5  },
+  "2 João":            { num: "24", id: "2joao",             caps: 1  },
+  "3 João":            { num: "25", id: "3joao",             caps: 1  },
+  "Judas":             { num: "26", id: "judas",             caps: 1  },
+  "Apocalipse":        { num: "27", id: "apocalipse",        caps: 22 }
+};
+
+// Função detectarPaginaAtual (corrigida para Netlify)
+function detectarPaginaAtual() {
+  let caminho = window.location.pathname;
+  caminho = caminho.split('?')[0].split('#')[0];
+  const arquivo = caminho.split('/').pop();
+  const match = arquivo.match(/^G(\d+)_([^_]+(?:_[^_]+)*)_(\d+)(?:\.html)?$/i);
+  if (!match) {
+    const tituloElem = document.querySelector('h1');
+    if (tituloElem && tituloElem.textContent) {
+      const partes = tituloElem.textContent.trim().split(/\s+/);
+      const livroCandidato = partes[0];
+      const capCandidato = parseInt(partes[1]);
+      if (livros[livroCandidato] && !isNaN(capCandidato)) {
+        return { livroNome: livroCandidato, cap: capCandidato };
+      }
+    }
+    return { livroNome: "Mateus", cap: 1 };
+  }
+  const numLivro = parseInt(match[1]);
+  const cap = parseInt(match[3]);
+  const livroNome = Object.keys(livros).find(l => parseInt(livros[l].num) === numLivro) || "Mateus";
+  return { livroNome, cap };
+}
+
+// Preenche selects e título
+const { livroNome: livroAtual, cap: capAtual } = detectarPaginaAtual();
+document.getElementById("titulo-capitulo").textContent = livroAtual + " " + capAtual;
+
+const livroSelect = document.getElementById("livroSelect");
+const capituloSelect = document.getElementById("capituloSelect");
+for (let livro in livros) {
+  let opt = document.createElement("option");
+  opt.value = livro;
+  opt.textContent = livro;
+  if (livro === livroAtual) opt.selected = true;
+  livroSelect.appendChild(opt);
+}
+function preencherCapitulos(livro, capSelecionado) {
+  capituloSelect.innerHTML = "";
+  for (let i = 1; i <= livros[livro].caps; i++) {
+    let opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = "Capítulo " + i;
+    if (i === capSelecionado) opt.selected = true;
+    capituloSelect.appendChild(opt);
+  }
+}
+preencherCapitulos(livroAtual, capAtual);
+
+livroSelect.addEventListener("change", function() {
+  const arquivo = gerarNomeArquivo(this.value, 1);
+  window.location.href = prontos.has(arquivo) ? arquivo : "em_construcao.html";
+});
+capituloSelect.addEventListener("change", function() {
+  const arquivo = gerarNomeArquivo(livroSelect.value, parseInt(this.value));
+  window.location.href = prontos.has(arquivo) ? arquivo : "em_construcao.html";
+});
+
+function gerarNomeArquivo(livroNome, cap) {
+  const info = livros[livroNome];
+  const nomeSimples = livroNome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+  const capStr = String(cap).padStart(2, "0");
+  return "G" + info.num + "_" + nomeSimples + "_" + capStr + ".html";
+}
+
+function toggleTransliteracao() {
+  document.querySelectorAll(".linha1").forEach(el => el.classList.toggle("oculto"));
+}
+function toggleTraducao() {
+  document.querySelectorAll(".linha3").forEach(el => el.classList.toggle("oculto"));
+}
+
+// SCRIPT DE BUSCA - versão com normalização de acentos
+(function() {
+    const searchBox = document.getElementById('searchBox');
+    if (!searchBox) return;
+
+    // Função para remover acentos e converter para minúsculas
+    function normalizar(texto) {
+        return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    // Função que agrupa células em versículos usando os números
+    function agruparVersiculos() {
+        const versiculos = [];
+        let celulas = Array.from(document.querySelectorAll('.celula'));
+        let versAtual = null;
+        
+        celulas.forEach(cel => {
+            const numeroSpan = cel.querySelector('.numero');
+            if (numeroSpan && numeroSpan.getAttribute('data-vers')) {
+                if (versAtual) versiculos.push(versAtual);
+                versAtual = { numero: numeroSpan.getAttribute('data-vers'), celulas: [cel] };
+            } else if (versAtual) {
+                versAtual.celulas.push(cel);
+            }
+        });
+        if (versAtual) versiculos.push(versAtual);
+        return versiculos;
+    }
+
+function buscar() {
+    const termoRaw = searchBox.value.trim();
+    
+    // Remove todos os destaques anteriores (tags <mark>)
+    document.querySelectorAll('mark').forEach(mark => {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize();
+    });
+    
+    if (termoRaw === "") {
+        const versiculos = agruparVersiculos();
+        versiculos.forEach(vers => vers.celulas.forEach(cel => cel.style.display = ''));
+        return;
+    }
+    
+    // Função para normalizar (remover acentos e minúsculas)
+    function normalizar(str) {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+    
+    const termoNorm = normalizar(termoRaw);
+    const versiculos = agruparVersiculos();
+    let algumResultado = false;
+    
+    versiculos.forEach(vers => {
+        const textoCompletoNorm = vers.celulas.map(cel => normalizar(cel.innerText)).join(' ');
+        const contem = textoCompletoNorm.includes(termoNorm);
+        
+        if (contem) {
+            algumResultado = true;
+            vers.celulas.forEach(cel => cel.style.display = '');
+            
+            // Destaca o termo dentro da célula usando innerHTML (mais seguro)
+            vers.celulas.forEach(cel => {
+                let html = cel.innerHTML;
+                // Cria uma regex que casa com o termo ignorando acentos e caixa
+                // Para isso, substituímos cada caractere do termo por [charComAcentos?]
+                // Mas é mais simples: percorre os nós de texto apenas, como antes, mas com correção
+                // Vamos usar uma abordagem que preserva os acentos originais no destaque:
+                const walker = document.createTreeWalker(cel, NodeFilter.SHOW_TEXT, null, false);
+                const nodes = [];
+                while (walker.nextNode()) nodes.push(walker.currentNode);
+                
+                nodes.forEach(node => {
+                    const original = node.textContent;
+                    const normalized = normalizar(original);
+                    let lastIndex = 0;
+                    let newHtml = '';
+                    let index;
+                    while ((index = normalized.indexOf(termoNorm, lastIndex)) !== -1) {
+                        newHtml += original.substring(lastIndex, index);
+                        const end = index + termoNorm.length;
+                        const matchedText = original.substring(index, end);
+                        newHtml += `<mark class="busca-highlight">${matchedText}</mark>`;
+                        lastIndex = end;
+                    }
+                    newHtml += original.substring(lastIndex);
+                    if (newHtml !== original) {
+                        const span = document.createElement('span');
+                        span.innerHTML = newHtml;
+                        node.parentNode.replaceChild(span, node);
+                    }
+                });
+            });
+        } else {
+            vers.celulas.forEach(cel => cel.style.display = 'none');
+        }
+    });
+    
+    if (!algumResultado) {
+        console.log('Nenhum versículo encontrado para: ' + termoRaw);
+    }
+}
+    
+    searchBox.addEventListener('input', buscar);
+    console.log('Busca com normalização de acentos inicializada');
+})();
+
+// Scroll suave e highlight para os links do menu
+document.addEventListener("DOMContentLoaded", function () {
+  function smoothScrollElementToTop(container, alvo) {
+    if (!alvo) return;
+    if (container && container !== document.body && container !== document.documentElement) {
+      const top = alvo.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
+      container.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      const top = window.scrollY + alvo.getBoundingClientRect().top - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+  function collectVerseCelulas(startCelula) {
+    const out = [];
+    if (!startCelula) return out;
+    let el = startCelula;
+    out.push(el);
+    while (el && el.nextElementSibling) {
+      const next = el.nextElementSibling;
+      if (next.querySelector && next.querySelector('.numero')) break;
+      out.push(next);
+      el = next;
+    }
+    return out;
+  }
+  function highlightCelulas(celulas) {
+    document.querySelectorAll('.celula .linha3.highlight').forEach(el => el.classList.remove('highlight'));
+    celulas.forEach(c => {
+      const linha3 = c.querySelector('.linha3') || c;
+      if (linha3) linha3.classList.add('highlight');
+    });
+    setTimeout(() => {
+      celulas.forEach(c => {
+        const linha3 = c.querySelector('.linha3') || c;
+        if (linha3) linha3.classList.remove('highlight');
+      });
+    }, 3000);
+  }
+  const navLinks = document.querySelectorAll('#menu-versiculos .link-versiculo');
+  navLinks.forEach(link => {
+    link.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const num = link.getAttribute('data-num');
+      if (!num) return;
+      const spanNumero = document.querySelector(`.numero[data-vers="${num}"]`);
+      if (!spanNumero) return;
+      const celulaStart = spanNumero.closest('.celula') || spanNumero.parentElement;
+      if (!celulaStart) {
+        smoothScrollElementToTop(document.body, spanNumero);
+        spanNumero.classList.add('highlight');
+        setTimeout(() => spanNumero.classList.remove('highlight'), 3000);
+        return;
+      }
+      let scrollContainer = celulaStart.closest('.coluna');
+      if (!scrollContainer) {
+        let anc = celulaStart.parentElement;
+        while (anc && anc !== document.body) {
+          const style = window.getComputedStyle(anc);
+          if (/(auto|scroll)/.test(style.overflowY)) { scrollContainer = anc; break; }
+          anc = anc.parentElement;
+        }
+      }
+      smoothScrollElementToTop(scrollContainer || document.body, celulaStart);
+      const celulasDoVersiculo = collectVerseCelulas(celulaStart);
+      highlightCelulas(celulasDoVersiculo);
+    });
+  });
+});
+
+// Botão de voltar ao topo
+window.addEventListener("scroll", function() {
+  const botao = document.getElementById("botao-topo");
+  if (window.scrollY > 200) botao.style.display = "block";
+  else botao.style.display = "none";
+});
+
+// Transforma números Strong em links
+document.querySelectorAll('.linha1').forEach(el => {
+  const match = el.textContent.match(/(.*?)(\d{1,5})$/);
+  if (match) {
+    const texto = match[1].trim();
+    const numero = match[2];
+    el.innerHTML = `${texto} <a href="https://biblehub.com/greek/${numero}.htm" target="_blank" rel="noopener noreferrer">${numero}</a>`;
+  }
+});
+
+// Highlight ao passar mouse sobre palavras gregas
+document.querySelectorAll('.linha2 span[data-id]').forEach(span => {
+  span.addEventListener('mouseenter', () => {
+    const palavra = span.getAttribute('data-id');
+    document.querySelectorAll(`.linha2 span[data-id='${palavra}']`).forEach(el => el.classList.add('highlight'));
+  });
+  span.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.linha2 span.highlight').forEach(el => el.classList.remove('highlight'));
+  });
+});
+</script>
+<script>
+// Carrega prontos.js apenas uma vez (se existir)
+if (typeof prontos === 'undefined') {
+  var script = document.createElement('script');
+  script.src = 'prontos.js';
+  document.head.appendChild(script);
+}
+</script>
+</body>
+</html>
